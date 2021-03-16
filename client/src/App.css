@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+
 .site-wrapper {
     font-family: 'Roboto', sans-serif;
-    text-align: center;
-    width: auto;
-    margin: 0;
+    margin: 0 auto;
 }

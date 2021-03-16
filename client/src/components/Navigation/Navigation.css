@@ -1,0 +1,27 @@
+.site-navigation {
+    background-color: lightcyan;
+    height: 65px;
+    padding: 20px 70px;
+}
+
+.site-navigation li{
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.site-navigation a {
+    text-decoration: none;
+    padding: 14px 36px;
+    margin-right: 5px;
+    color: mediumaquamarine;
+    background-color: floralwhite;
+    font-size: 21px;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.site-navigation a:hover {
+    color: floralwhite;
+    background-color: mediumaquamarine;
+}

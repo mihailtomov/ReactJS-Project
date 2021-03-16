@@ -6,9 +6,19 @@ const Main = () => {
             <h2 className="posts-heading">All posts</h2>
             <section>
                 <article>
-                    <h3>Post heading</h3>
-                    <img src="./blog.jpg" alt="" />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis similique ducimus laudantium hic numquam eveniet tempore eius ipsam architecto unde.</p>
+                    <h3>Post Title</h3>
+                    <p>Description</p>
+                    <span className="author">Author: <small>Pesho</small></span>
+                </article>
+
+                <article>
+                    <h3>Post Title</h3>
+                    <p>Description</p>
+                </article>
+
+                <article>
+                    <h3>Post Title</h3>
+                    <p>Description</p>
                 </article>
             </section>
         </main>
