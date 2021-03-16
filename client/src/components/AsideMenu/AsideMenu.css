@@ -1,0 +1,19 @@
+.aside-menu {
+    float: left;
+    width: 200px;
+    padding: 0 20px;
+}
+
+.aside-menu nav a {
+    display: block;
+    margin: 10px 0px;
+    text-decoration: none;
+    font-size: 22px;
+    color: lightseagreen;
+    font-weight: bold;
+}
+
+.aside-menu img {
+    width: 128px;
+    height: 128px;
+}

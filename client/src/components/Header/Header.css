@@ -1,16 +1,21 @@
-.site-navigation {
+.site-header {
     background-color: lightcyan;
     height: 65px;
-    padding: 20px 70px;
+    padding: 15px 20px;
+    text-align: left;
 }
 
-.site-navigation li{
+.site-header li{
     display: inline-block;
     margin-left: 20px;
     margin-top: 20px;
 }
 
-.site-navigation a {
+.site-header li span {
+    font-size: 20px;
+}
+
+.site-header a {
     text-decoration: none;
     padding: 14px 36px;
     margin-right: 5px;
@@ -21,7 +26,7 @@
     border-radius: 25px;
 }
 
-.site-navigation a:hover {
+.site-header a:hover {
     color: floralwhite;
     background-color: mediumaquamarine;
 }

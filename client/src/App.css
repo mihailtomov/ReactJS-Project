@@ -9,7 +9,25 @@
     background: transparent;
 }
 
+body { 
+    text-align: center;
+    padding: 40px;
+}
+
+body > div {
+    text-align: left;
+    display: inline-block;
+    clear: both;
+}
+
 .site-wrapper {
     font-family: 'Roboto', sans-serif;
-    margin: 0 auto;
+    margin: 0;
+    border-left: 1px solid black;
+    border-right: 1px solid lightgreen;
+}
+
+.container {
+    float: left;
+    width: 1000px;
 }
