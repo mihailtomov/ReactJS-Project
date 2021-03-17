@@ -1,7 +1,6 @@
 .aside-menu {
     float: left;
-    width: 200px;
-    padding: 0 20px;
+    width: 160px;
 }
 
 .aside-menu nav a {
@@ -9,8 +8,12 @@
     margin: 10px 0px;
     text-decoration: none;
     font-size: 22px;
-    color: lightseagreen;
+    color: rgb(17, 65, 62);
     font-weight: bold;
+}
+
+.aside-menu nav a:hover {
+    text-decoration: underline;
 }
 
 .aside-menu img {

@@ -1,14 +1,12 @@
 .site-header {
-    background-color: lightcyan;
-    height: 65px;
-    padding: 15px 20px;
+    height: 33px;
+    padding: 20px;
     text-align: left;
 }
 
 .site-header li{
     display: inline-block;
-    margin-left: 20px;
-    margin-top: 20px;
+    padding: 10px;
 }
 
 .site-header li span {
@@ -17,16 +15,16 @@
 
 .site-header a {
     text-decoration: none;
-    padding: 14px 36px;
+    /* padding: 10px 25px; */
     margin-right: 5px;
-    color: mediumaquamarine;
-    background-color: floralwhite;
-    font-size: 21px;
+    color: black;
+    /* background-color: rgb(120, 178, 224); */
+    font-size: 19px;
     font-weight: bold;
-    border-radius: 25px;
+    /* border-radius: 25px; */
 }
 
 .site-header a:hover {
-    color: floralwhite;
-    background-color: mediumaquamarine;
+    color: rgb(97, 218, 251);
+    background-color: rgb(255, 255, 255);
 }
