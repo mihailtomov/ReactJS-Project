@@ -3,10 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    border: 0;
-    outline: 0;
     vertical-align: baseline;
-    background: transparent;
 }
 
 body { 
@@ -30,4 +27,21 @@ body > div {
     width: 1000px;
     border-left: 1px solid lightseagreen;
     border-right: 1px solid lightseagreen;
+}
+
+input[type=text], input[type=password], input[type=submit] {
+    display: block;
+    margin: 10px 0px;
+    padding: 5px;
+}
+
+input[type=submit] {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
 }

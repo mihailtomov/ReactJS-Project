@@ -7,7 +7,7 @@ const AsideMenu = () => {
                 <img src="logo192.png" alt=""/>
             </div>
             <nav>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
                 <a href="#">Music</a>
                 <a href="#">Gaming</a>
                 <a href="#">Anything Else</a>
