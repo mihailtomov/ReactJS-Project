@@ -1,16 +1,18 @@
 import './AsideMenu.css';
 
+import { Link } from 'react-router-dom';
+
 const AsideMenu = () => {
     return (
         <aside className="aside-menu">
             <div>
-                <img src="logo192.png" alt=""/>
+                <img src="logo192.png" alt="" />
             </div>
             <nav>
-                <a href="/">Home</a>
-                <a href="#">Music</a>
-                <a href="#">Gaming</a>
-                <a href="#">Anything Else</a>
+                <Link to="/">Home</Link>
+                <Link to="#">Music</Link>
+                <Link to="#">Gaming</Link>
+                <Link to="#">Anything Else</Link>
             </nav>
         </aside>
     )
