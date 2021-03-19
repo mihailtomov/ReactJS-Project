@@ -1,7 +1,7 @@
 const config = {
     development: {
         PORT: 5000,
-        DB_CONNECTION: 'mongodb://localhost:27017/ReactJS-Project',
+        DB_CONNECTION: 'mongodb://localhost/reactjs-project',
         SALT_ROUNDS: 1,
         SECRET: 'reactjs',
         AUTH_COOKIE: 'AUTH',
