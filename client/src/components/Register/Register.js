@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import {register} from '../../services/authService';
+import { register } from '../../services/authService';
 
 class Register extends Component {
     constructor() {

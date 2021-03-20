@@ -7,7 +7,13 @@ router.post('/register', (req, res) => {
         .then(createdUser => {
             res.status(201).json({ _id: createdUser._id });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            let message;
+
+            err.message ? message = err.message : message = 'Something went wrong!';
+
+            res.status(500).json({ message });
+        });
 });
 
 module.exports = router;

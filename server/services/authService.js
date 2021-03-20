@@ -1,15 +1,21 @@
 const User = require('../models/User');
+const { SALT_ROUNDS } = require('../config/server');
+const bcrypt = require('bcrypt');
 
 const register = ({ username, password }) => {
-    // Check if username exists
-
     // Check if data is valid
 
-    // Hash password and register user
+    return User.exists({ username })
+        .then(userExists => {
+            if (userExists) throw { message: 'User already exists!' }
 
-    const user = new User({username, password});
-
-    return user.save();
+            return bcrypt.hash(password, SALT_ROUNDS);
+        })
+        .then(hash => {
+            const user = new User({ username, password: hash });
+        
+            return user.save();
+        })
 }
 
 module.exports = {
