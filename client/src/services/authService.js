@@ -2,6 +2,7 @@ const baseUrl = 'http://localhost:5000/api/auth';
 
 const endpoints = {
     register: `${baseUrl}/register`,
+    login: `${baseUrl}/login`,
 }
 
 const postOptions = (data) => {
@@ -21,6 +22,17 @@ export const register = ({ username, password, repeatPassword }) => {
 
     if (validateEmpty && passwordsMatch) {
         return fetch(endpoints.register, postOptions({ username, password }))
+            .then(res => res.json())
+    } else {
+        return Promise.reject({ message: 'Invalid input!' });
+    }
+}
+
+export const login = ({ username, password }) => {
+    const validateEmpty = username.trim() !== '' && password.trim() !== '';
+
+    if (validateEmpty) {
+        return fetch(endpoints.login, postOptions({ username, password }))
             .then(res => res.json())
     } else {
         return Promise.reject({ message: 'Invalid input!' });

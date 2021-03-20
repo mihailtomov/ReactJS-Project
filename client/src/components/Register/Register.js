@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { register } from '../../services/authService';
 
@@ -10,6 +11,7 @@ class Register extends Component {
             username: '',
             password: '',
             repeatPassword: '',
+            registered: false,
         }
     }
 
@@ -35,12 +37,18 @@ class Register extends Component {
         event.preventDefault();
 
         register(this.state)
-            .then(data => console.log(data))
+            .then(() => {
+                this.setState({ registered: true });
+            })
             .catch(err => console.log(err.message))
     }
 
     render() {
-        const { username, password, repeatPassword } = this.state;
+        const { username, password, repeatPassword, registered } = this.state;
+
+        if (registered) {
+            return <Redirect to="/login" />
+        }
 
         return (
             <section>
