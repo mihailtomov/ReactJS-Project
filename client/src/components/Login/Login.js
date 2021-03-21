@@ -30,9 +30,13 @@ class Login extends Component {
         event.preventDefault();
 
         login(this.state)
-            .then(res => {
-                console.log(res);
-                this.setState({ loggedIn: true });
+            .then(userInfo => {
+                localStorage.setItem('user', userInfo.username);
+                localStorage.setItem('auth', userInfo.token);
+
+                setTimeout(() => {
+                    this.setState({ loggedIn: true });
+                }, 500)
             })
             .catch(err => console.log(err))
     }
