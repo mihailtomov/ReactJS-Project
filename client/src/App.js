@@ -12,12 +12,13 @@ class App extends Component {
         super();
 
         this.state = {
-            loggedIn: false
+            loggedIn: false,
+            username: '',
         }
     }
 
     checkLoggedIn = () => {
-        this.setState({ loggedIn: true });
+        this.setState({ loggedIn: true, username: localStorage['user'] });
     }
 
     checkLoggedOut = () => {
@@ -31,7 +32,7 @@ class App extends Component {
                 <AsideMenu />
 
                 <div className="container">
-                    <Header loggedIn={this.state.loggedIn} />
+                    <Header loggedIn={this.state.loggedIn} username={this.state.username} />
 
                     <Main checkLoggedIn={this.checkLoggedIn} checkLoggedOut={this.checkLoggedOut} />
 

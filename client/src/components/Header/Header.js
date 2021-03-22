@@ -11,7 +11,8 @@ class Header extends Component {
                 <header className="site-header">
                     <nav>
                         <ul>
-                            <li><span>Welcome, Pesho!</span></li>
+                            <li><Link to="/article/create" >Create Article</Link></li>
+                            <li><span>Welcome, {this.props.username}!</span></li>
                             <li><Link to="/logout">Logout</Link></li>
                         </ul>
                     </nav>
