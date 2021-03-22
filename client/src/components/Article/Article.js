@@ -14,6 +14,7 @@ const Article = () => {
                 <Link className="read-more" to="">Read more</Link>
             </div>
             <div>
+                <small>Author: </small>
                 <span className="author-name">pesho</span>
                 <p>
                     <time dateTime="2015-05-16 19:00">2015-05-16 19:00</time>

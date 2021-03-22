@@ -21,7 +21,10 @@ const register = ({ username, password }) => {
 const login = ({ username, password }) => {
     return User.findOne({ username })
         .then(user => {
-            if (!user) throw { message: 'Invalid username or password!' };
+            console.log(user);
+            if (!user) {
+                throw { message: 'Invalid username or password!' };
+            };
 
             return bcrypt.compare(password, user.password)
                 .then(isValidPassword => {

@@ -3,7 +3,9 @@ import { Redirect } from 'react-router-dom';
 const Logout = (props) => {
     localStorage.clear();
 
-    props.checkLoggedOut();
+    setTimeout(() => {
+        props.checkLoggedOut();
+    }, 20);
 
     return (
         <Redirect to="/login" />
