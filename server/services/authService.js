@@ -21,7 +21,6 @@ const register = ({ username, password }) => {
 const login = ({ username, password }) => {
     return User.findOne({ username })
         .then(user => {
-            console.log(user);
             if (!user) {
                 throw { message: 'Invalid username or password!' };
             };

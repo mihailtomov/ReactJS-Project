@@ -14,27 +14,13 @@ class Register extends Component {
             registered: false,
         }
     }
-
-    changeUsername = (event) => {
-        this.setState({
-            username: event.target.value
-        });
+    
+    onChangeHandler = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
-    changePassword = (event) => {
-        this.setState({
-            password: event.target.value
-        });
-    }
-
-    changeRepeatPassword = (event) => {
-        this.setState({
-            repeatPassword: event.target.value
-        });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
 
         register(this.state)
             .then(() => {
@@ -56,11 +42,11 @@ class Register extends Component {
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <label>Username:</label>
-                        <input type="text" value={username} onChange={this.changeUsername} />
+                        <input type="text" name="username" value={username} onChange={this.onChangeHandler} />
                         <label>Password:</label>
-                        <input type="password" value={password} onChange={this.changePassword} />
+                        <input type="password" name="password" value={password} onChange={this.onChangeHandler} />
                         <label>Repeat password:</label>
-                        <input type="password" value={repeatPassword} onChange={this.changeRepeatPassword} />
+                        <input type="password" name="repeatPassword" value={repeatPassword} onChange={this.onChangeHandler} />
                         <input type="submit" value="Register" />
                     </form>
                 </div>

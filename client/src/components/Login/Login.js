@@ -14,25 +14,17 @@ class Login extends Component {
         }
     }
 
-    changeUsername = (event) => {
-        this.setState({
-            username: event.target.value
-        });
+    onChangeHandler = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
-    changePassword = (event) => {
-        this.setState({
-            password: event.target.value
-        });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
 
         login(this.state)
             .then(res => {
                 if (res.message) throw res;
-                
+
                 localStorage.setItem('user', res.username);
                 localStorage.setItem('auth', res.token);
 
@@ -56,9 +48,9 @@ class Login extends Component {
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <label>Username:</label>
-                        <input type="text" value={username} onChange={this.changeUsername} />
+                        <input type="text" name="username" value={username} onChange={this.onChangeHandler} />
                         <label>Password:</label>
-                        <input type="password" value={password} onChange={this.changePassword} />
+                        <input type="password" name="password" value={password} onChange={this.onChangeHandler} />
                         <input type="submit" value="Login" />
                     </form>
                 </div>
