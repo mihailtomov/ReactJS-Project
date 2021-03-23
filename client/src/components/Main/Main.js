@@ -16,15 +16,15 @@ class Main extends Component {
             <main className="main-wrapper">
                 <Switch>
                     <Route path="/" exact>
-                        <Home checkLoggedIn={this.props.checkLoggedIn} />
+                        <Home loggedInStateHandler={this.props.loggedInStateHandler} />
                     </Route>
                     <Route path="/article/create" exact>
-                        <ArticleCreate checkLoggedIn={this.props.checkLoggedIn} />
+                        <ArticleCreate loggedInStateHandler={this.props.loggedInStateHandler} />
                     </Route>
                     <Route path="/register" component={Register} exact />
                     <Route path="/login" component={Login} exact />
                     <Route path="/logout" exact>
-                        <Logout checkLoggedOut={this.props.checkLoggedOut} />
+                        <Logout loggedOutStateHandler={this.props.loggedOutStateHandler} />
                     </Route>
                     <Route component={NotFound} />
                 </Switch>

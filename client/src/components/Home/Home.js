@@ -4,7 +4,7 @@ import ArticleList from '../ArticleList/ArticleList.js';
 
 class Home extends Component {
     componentDidMount() {
-        if (localStorage['auth']) this.props.checkLoggedIn();
+        if (localStorage['auth']) this.props.loggedInStateHandler();
     }
 
     render() {

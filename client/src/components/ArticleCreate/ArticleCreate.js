@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 class ArticleCreate extends Component {
     componentDidMount() {
-        if (localStorage['auth']) this.props.checkLoggedIn();
+        if (localStorage['auth']) this.props.loggedInStateHandler();
     }
 
     render() {

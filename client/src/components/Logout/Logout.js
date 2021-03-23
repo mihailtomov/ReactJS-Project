@@ -4,7 +4,7 @@ const Logout = (props) => {
     localStorage.clear();
 
     setTimeout(() => {
-        props.checkLoggedOut();
+        props.loggedOutStateHandler();
     }, 20);
 
     return (

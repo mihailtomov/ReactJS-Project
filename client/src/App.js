@@ -17,11 +17,11 @@ class App extends Component {
         }
     }
 
-    checkLoggedIn = () => {
+    loggedInStateHandler = () => {
         this.setState({ loggedIn: true, username: localStorage['user'] });
     }
 
-    checkLoggedOut = () => {
+    loggedOutStateHandler = () => {
         this.setState({ loggedIn: false });
     }
 
@@ -34,7 +34,10 @@ class App extends Component {
                 <div className="container">
                     <Header loggedIn={this.state.loggedIn} username={this.state.username} />
 
-                    <Main checkLoggedIn={this.checkLoggedIn} checkLoggedOut={this.checkLoggedOut} />
+                    <Main
+                        loggedInStateHandler={this.loggedInStateHandler}
+                        loggedOutStateHandler={this.loggedOutStateHandler}
+                    />
 
                     <Footer />
                 </div>
