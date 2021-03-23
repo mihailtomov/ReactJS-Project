@@ -15,7 +15,7 @@ const postOptions = (data) => {
     }
 }
 
-export const register = ({ username, password, repeatPassword }) => {
+const register = ({ username, password, repeatPassword }) => {
     const validateEmpty = username.trim() !== '' && password.trim() !== '' && repeatPassword.trim() !== '';
 
     const passwordsMatch = password === repeatPassword;
@@ -28,7 +28,7 @@ export const register = ({ username, password, repeatPassword }) => {
     }
 }
 
-export const login = ({ username, password }) => {
+const login = ({ username, password }) => {
     const validateEmpty = username.trim() !== '' && password.trim() !== '';
 
     if (validateEmpty) {
@@ -38,3 +38,10 @@ export const login = ({ username, password }) => {
         return Promise.reject({ message: 'Invalid input!' });
     }
 }
+
+const authService = {
+    register,
+    login,
+}
+
+export default authService;

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { login } from '../../services/authService';
+import authService from '../../services/authService';
 
 class Login extends Component {
     constructor() {
@@ -18,10 +18,10 @@ class Login extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleSubmit = (e) => {
+    onSubmitHandler = (e) => {
         e.preventDefault();
 
-        login(this.state)
+        authService.login(this.state)
             .then(res => {
                 if (res.message) throw res;
 
@@ -46,7 +46,7 @@ class Login extends Component {
             <section>
                 <h2>Login</h2>
                 <div>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.onSubmitHandler}>
                         <label>Username:</label>
                         <input type="text" name="username" value={username} onChange={this.onChangeHandler} />
                         <label>Password:</label>

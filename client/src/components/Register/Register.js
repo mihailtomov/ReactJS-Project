@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { register } from '../../services/authService';
+import authService from '../../services/authService';
 
 class Register extends Component {
     constructor() {
@@ -19,10 +19,10 @@ class Register extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleSubmit = (e) => {
+    onSubmitHandler = (e) => {
         e.preventDefault();
 
-        register(this.state)
+        authService.register(this.state)
             .then(() => {
                 this.setState({ registered: true });
             })
@@ -40,7 +40,7 @@ class Register extends Component {
             <section>
                 <h2>Register</h2>
                 <div>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.onSubmitHandler}>
                         <label>Username:</label>
                         <input type="text" name="username" value={username} onChange={this.onChangeHandler} />
                         <label>Password:</label>
