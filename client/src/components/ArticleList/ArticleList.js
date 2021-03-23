@@ -1,20 +1,25 @@
-import { Component } from 'react';
-
 import Article from '../Article/Article.js';
 
-class ArticleList extends Component {
-    render() {
-        return (
-            <section>
-                <h2>Latest Articles</h2>
+const ArticleList = ({
+    articles
+}) => {
+    return (
+        <section>
+            <h2>Latest Articles</h2>
 
-                < Article />
-                < Article />
-                < Article />
+            {
+                articles.map(x => <Article
+                    key={x._id}
+                    title={x.title}
+                    content={x.content}
+                    author={x.author}
+                    date={x.date}
+                    _id={x._id}
+                />)
+            }
 
-            </section>
-        );
-    }
+        </section>
+    );
 }
 
 export default ArticleList;

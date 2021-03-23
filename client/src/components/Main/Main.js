@@ -15,18 +15,23 @@ class Main extends Component {
         return (
             <main className="main-wrapper">
                 <Switch>
+
                     <Route path="/" exact>
                         <Home loggedInStateHandler={this.props.loggedInStateHandler} />
                     </Route>
+
                     <Route path="/article/create" exact>
                         <ArticleCreate loggedInStateHandler={this.props.loggedInStateHandler} />
                     </Route>
+
                     <Route path="/register" component={Register} exact />
                     <Route path="/login" component={Login} exact />
                     <Route path="/logout" exact>
                         <Logout loggedOutStateHandler={this.props.loggedOutStateHandler} />
                     </Route>
+
                     <Route component={NotFound} />
+
                 </Switch>
             </main>
         )

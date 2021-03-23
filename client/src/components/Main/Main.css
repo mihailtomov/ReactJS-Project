@@ -39,12 +39,15 @@
     font-size: 12px;
 }
 
-.main-wrapper input.title {
-    width: 100%;
+.main-wrapper textarea[name=content] {
+    resize: vertical;
+    width: 70%;
+    min-height: 300px;
+    margin-top: 10px;
 }
 
-.main-wrapper textarea.content {
-    resize: vertical;
-    width: 100%;
-    min-height: 300px;
+.main-wrapper select[name=category] {
+    margin-top: 10px;
+    width: 100px;
+    height: 26px;
 }
