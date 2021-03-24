@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import articleService from '../../services/articleService';
 
+import './DetailsArticle.css';
+
 const DetailsArticle = (
     { match }
 ) => {
@@ -28,7 +30,7 @@ const DetailsArticle = (
 
     return (
         <section>
-            <article>
+            <article className="details-article">
                 <h3>{title}</h3>
                 <img src={imageUrl} alt="" />
                 <p className="description">

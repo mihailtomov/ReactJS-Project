@@ -8,39 +8,10 @@
 }
 
 .main-wrapper section h2 {
-    padding: 10px 20px;
+    font-size: 30px;
+    padding: 10px;
     margin: 0 -10px;
-    background-color: rgb(207, 237, 247);
-}
-
-.main-wrapper section article { 
-    padding: 30px 0 10px 0;
-}
-
-.main-wrapper section article h3 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.main-wrapper section article img {
-    width: 250px;
-    margin-bottom: 20px;
-}
-
-.main-wrapper section article p.description {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    margin-bottom: 23px;
-}
-
-.main-wrapper a.read-more {
-    text-decoration: none;
-}
-
-.main-wrapper span.author-name {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    /* background-color: rgb(207, 237, 247); */
 }
 
 .main-wrapper time[datetime] {
