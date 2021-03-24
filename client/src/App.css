@@ -17,12 +17,12 @@ body > div {
     clear: both;
 }
 
-.site-wrapper {
+div.site-wrapper {
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
-.container {
+div.container {
     float: left;
     width: 1000px;
     border-left: 1px solid lightseagreen;
@@ -35,7 +35,7 @@ input[type=text], input[type=password], input[type=submit] {
     padding: 5px;
 }
 
-input[type=text] {
+input[name=title], input[name=imageUrl] {
     width: 500px;
 }
 

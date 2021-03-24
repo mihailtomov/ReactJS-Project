@@ -1,5 +1,5 @@
 .main-wrapper { 
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .main-wrapper section {
@@ -14,29 +14,38 @@
 }
 
 .main-wrapper section article { 
-    padding: 20px 0px;
+    padding: 30px 0 10px 0;
 }
 
 .main-wrapper section article h3 {
-    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.main-wrapper section article img {
+    width: 250px;
+    margin-bottom: 20px;
 }
 
 .main-wrapper section article p.description {
-    margin-bottom: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    margin-bottom: 23px;
 }
 
-.main-wrapper .read-more {
+.main-wrapper a.read-more {
     text-decoration: none;
-    float: right;
-    margin-right: 10px;
 }
 
 .main-wrapper span.author-name {
-    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 .main-wrapper time[datetime] {
-    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
 }
 
 .main-wrapper textarea[name=content] {
@@ -48,6 +57,6 @@
 
 .main-wrapper select[name=category] {
     margin-top: 10px;
-    width: 100px;
+    width: 140px;
     height: 26px;
 }

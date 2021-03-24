@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Article = ({
+const HomeArticle = ({
     title,
     content,
     author,
@@ -11,14 +11,11 @@ const Article = ({
         <article>
             <h3>{title}</h3>
             <p className="description">
-                {content}&hellip;
+                {content.slice(0, 100)}&hellip;
+                <Link className="read-more" to={`article/details/${_id}`}>read more</Link>
             </p>
             <div>
-                <Link className="read-more" to={`article/details/${_id}`}>Read more</Link>
-            </div>
-            <div>
-                <small>Author: </small>
-                <span className="author-name">{author}</span>
+                <span className="author-name">Published by <strong>{author}</strong></span>
                 <p>
                     <time dateTime={date}>{date}</time>
                 </p>
@@ -27,4 +24,4 @@ const Article = ({
     );
 }
 
-export default Article;
+export default HomeArticle;

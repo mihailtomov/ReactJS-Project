@@ -21,9 +21,15 @@ const getAll = () => {
         .then(res => res.json());
 }
 
+const getOne = (articleId) => {
+    return fetch(`${baseUrl}/${articleId}`)
+        .then(res => res.json());
+}
+
 const articleService = {
     create,
     getAll,
+    getOne,
 }
 
 export default articleService;

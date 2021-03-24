@@ -1,7 +1,7 @@
 const Article = require('../models/Article');
 
 const create = (articleData) => {
-    const options = { weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+    const options = { year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 
     articleData.date = new Date().toLocaleDateString('en-GB', options);
 
@@ -14,7 +14,12 @@ const getAll = () => {
     return Article.find();
 }
 
+const getOne = (articleId) => {
+    return Article.findOne({ _id: articleId });
+}
+
 module.exports = {
     create,
     getAll,
+    getOne,
 }

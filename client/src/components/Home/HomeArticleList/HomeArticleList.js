@@ -1,6 +1,6 @@
-import Article from '../Article/Article.js';
+import HomeArticle from '../HomeArticle/HomeArticle.js';
 
-const ArticleList = ({
+const HomeArticleList = ({
     articles
 }) => {
     return (
@@ -8,7 +8,7 @@ const ArticleList = ({
             <h2>Latest Articles</h2>
 
             {
-                articles.map(x => <Article
+                articles.map(x => <HomeArticle
                     key={x._id}
                     title={x.title}
                     content={x.content}
@@ -22,4 +22,4 @@ const ArticleList = ({
     );
 }
 
-export default ArticleList;
+export default HomeArticleList;

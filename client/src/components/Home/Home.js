@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import ArticleList from '../ArticleList/ArticleList.js';
+import HomeArticleList from './HomeArticleList/HomeArticleList.js';
 
 import articleService from '../../services/articleService';
 
@@ -29,7 +29,7 @@ class Home extends Component {
         const { articles } = this.state;
 
         if (articles.length > 0) {
-            return <ArticleList articles={articles} />
+            return <HomeArticleList articles={articles} />
         } 
 
         return <p>There are no articles here yet..</p>

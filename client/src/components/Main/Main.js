@@ -9,6 +9,7 @@ import Login from '../Login/Login.js';
 import NotFound from '../NotFound/NotFound.js';
 import Logout from '../Logout/Logout.js';
 import ArticleCreate from '../ArticleCreate/ArticleCreate.js';
+import DetailsArticle from '../DetailsArticle/DetailsArticle.js';
 
 class Main extends Component {
     render() {
@@ -20,13 +21,15 @@ class Main extends Component {
                         <Home loggedInStateHandler={this.props.loggedInStateHandler} />
                     </Route>
 
-                    <Route path="/article/create" exact>
+                    <Route path="/article/create">
                         <ArticleCreate loggedInStateHandler={this.props.loggedInStateHandler} />
                     </Route>
 
-                    <Route path="/register" component={Register} exact />
-                    <Route path="/login" component={Login} exact />
-                    <Route path="/logout" exact>
+                    <Route path="/article/details/:articleId" component={DetailsArticle} />
+
+                    <Route path="/register" component={Register} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/logout">
                         <Logout loggedOutStateHandler={this.props.loggedOutStateHandler} />
                     </Route>
 
