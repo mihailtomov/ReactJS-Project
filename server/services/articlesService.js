@@ -10,8 +10,12 @@ const create = (articleData) => {
     return article.save();
 }
 
-const getAll = () => {
-    return Article.find();
+const getAll = (category) => {
+    if (category === 'all') {
+        return Article.find();
+    } else {
+        return Article.find({ category });
+    }
 }
 
 const getOne = (articleId) => {

@@ -6,7 +6,6 @@ const HomeArticle = ({
     title,
     content,
     author,
-    date,
     _id,
 }) => {
     return (
@@ -18,9 +17,6 @@ const HomeArticle = ({
             </p>
             <div>
                 <span className="author-name">Published by <strong>{author}</strong></span>
-                {/* <p>
-                    <time dateTime={date}>{date}</time>
-                </p> */}
             </div>
         </article>
     );

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import articleService from '../../services/articleService';
 
-class ArticleCreate extends Component {
+class CreateArticle extends Component {
     constructor() {
         super();
 
@@ -71,4 +71,4 @@ class ArticleCreate extends Component {
     }
 }
 
-export default ArticleCreate;
+export default CreateArticle;

@@ -9,10 +9,9 @@ const AsideMenu = () => {
                 <img src="../logo192.png" alt="" />
             </div>
             <nav>
-                <Link to="/">Home</Link>
-                <Link to="#">Music</Link>
-                <Link to="#">Gaming</Link>
-                <Link to="#">Anything Else</Link>
+                <Link to="/categories/all">Home</Link>
+                <Link to="/categories/music">Music</Link>
+                <Link to="/categories/gaming">Gaming</Link>
             </nav>
         </aside>
     )

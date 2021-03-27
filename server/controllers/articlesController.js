@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const articlesService = require('../services/articlesService');
 
-router.get('/', (req, res) => {
-    articlesService.getAll()
+router.get('/:category', (req, res) => {
+    const { category } = req.params;
+
+    articlesService.getAll(category)
         .then(articles => {
             res.status(200).json({ articles });
         })

@@ -5,17 +5,17 @@ import HomeArticleList from './HomeArticleList/HomeArticleList.js';
 import articleService from '../../services/articleService';
 
 class Home extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            articles: []
+            articles: [],
+            category: 'all',
         }
     }
 
     componentDidMount() {
         if (localStorage['auth']) this.props.loggedInStateHandler();
-
         articleService.getAll()
             .then(articles => {
                 this.setState(articles);
@@ -25,14 +25,34 @@ class Home extends Component {
             })
     }
 
+    componentDidUpdate() {
+        const { category } = this.props.match.params;
+
+        if (category !== this.state.category) {
+            articleService.getAll(category)
+                .then(articles => {
+                    this.setState((oldState) => {
+                        if (oldState.category !== category) {
+                            articles.category = category;
+
+                            return articles;
+                        }
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    }
+
     render() {
         const { articles } = this.state;
 
         if (articles.length > 0) {
             return <HomeArticleList articles={articles} />
-        } 
+        }
 
-        return <p>There are no articles here yet..</p>
+        return <p>There are no articles in this section. Be the first to create one!</p>
     }
 }
 

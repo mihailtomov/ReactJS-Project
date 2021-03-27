@@ -16,8 +16,8 @@ const create = (articleData) => {
         .then(res => res.json())
 }
 
-const getAll = () => {
-    return fetch(baseUrl)
+const getAll = (category) => {
+    return fetch(`${baseUrl}/${category}`)
         .then(res => res.json());
 }
 
