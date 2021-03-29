@@ -16,7 +16,7 @@ class Home extends Component {
 
     componentDidMount() {
         if (localStorage['auth']) this.props.loggedInStateHandler();
-        articleService.getAll()
+        articleService.getAll(this.state.category)
             .then(articles => {
                 this.setState(articles);
             })
@@ -26,7 +26,11 @@ class Home extends Component {
     }
 
     componentDidUpdate() {
-        const { category } = this.props.match.params;
+        let category = 'all';
+
+        if (this.props.match) {
+            category = this.props.match.params.category;
+        }
 
         if (category !== this.state.category) {
             articleService.getAll(category)

@@ -1,6 +1,7 @@
 const baseUrl = 'http://localhost:5000/api/articles';
 
 const postOptions = (data) => {
+    console.log(localStorage['auth']);
     return {
         method: 'POST',
         headers: {

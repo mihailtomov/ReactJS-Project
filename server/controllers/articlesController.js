@@ -21,6 +21,8 @@ router.post('/', (req, res) => {
 router.get('/:articleId', (req, res) => {
     const { articleId } = req.params;
 
+    console.log(articleId);
+
     articlesService.getOne(articleId)
         .then(article => {
             res.status(200).json(article);

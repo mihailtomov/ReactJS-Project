@@ -13,7 +13,7 @@ const HomeArticle = ({
             <h3>{title}</h3>
             <p className="description">
                 {content.slice(0, 150)}&hellip;
-                <Link className="read-more" to={`article/details/${_id}`}>read more</Link>
+                <Link className="read-more" to={`/article/details/${_id}`}>read more</Link>
             </p>
             <div>
                 <span className="author-name">Published by <strong>{author}</strong></span>
