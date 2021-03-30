@@ -24,17 +24,20 @@ class CreateArticle extends Component {
         const category = e.target.category.value;
         const author = localStorage['user'];
 
-        articleService.create({
-            title,
-            content,
-            imageUrl,
-            category,
-            author
-        }).then(res => {
-            if (!res.message) {
+        articleService
+            .create({
+                title,
+                content,
+                imageUrl,
+                category,
+                author
+            })
+            .then(res => {
+                if (res.err) throw res.err;
+
                 this.setState({ articleCreated: true });
-            }
-        })
+            })
+            .catch(err => console.log(err))
     }
 
     render() {

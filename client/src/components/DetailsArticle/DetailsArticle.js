@@ -17,8 +17,10 @@ const DetailsArticle = (
         const { articleId } = match.params;
 
         articleService.getOne(articleId)
-            .then(article => {
-                const { title, imageUrl, content, author, date } = article;
+            .then(res => {
+                if (res.err) throw res.err;
+
+                const { title, imageUrl, content, author, date } = res;
 
                 setTitle(title);
                 setContent(content);
@@ -26,6 +28,7 @@ const DetailsArticle = (
                 setAuthor(author);
                 setDate(date);
             })
+            .catch(err => console.log(err))
     });
 
     return (

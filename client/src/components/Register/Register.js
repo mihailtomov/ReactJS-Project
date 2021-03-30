@@ -23,10 +23,12 @@ class Register extends Component {
         e.preventDefault();
 
         authService.register(this.state)
-            .then(() => {
+            .then(res => {
+                if (res.err) throw res.err;
+
                 this.setState({ registered: true });
             })
-            .catch(err => console.log(err.message))
+            .catch(err => console.log(err))
     }
 
     render() {

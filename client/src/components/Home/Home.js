@@ -17,12 +17,14 @@ class Home extends Component {
     componentDidMount() {
         if (localStorage['auth']) this.props.loggedInStateHandler();
         articleService.getAll(this.state.category)
-            .then(articles => {
-                this.setState(articles);
+            .then(res => {
+                if (res.err) throw res;
+
+                this.setState(res);
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
     }
 
     componentDidUpdate() {
@@ -34,18 +36,20 @@ class Home extends Component {
 
         if (category !== this.state.category) {
             articleService.getAll(category)
-                .then(articles => {
+                .then(res => {
+                    if (res.err) throw res.err;
+
                     this.setState((oldState) => {
                         if (oldState.category !== category) {
-                            articles.category = category;
+                            res.category = category;
 
-                            return articles;
+                            return res;
                         }
                     })
                 })
                 .catch(err => {
                     console.log(err);
-                })
+                });
         }
     }
 

@@ -23,7 +23,7 @@ class Login extends Component {
 
         authService.login(this.state)
             .then(res => {
-                if (res.message) throw res;
+                if (res.err) throw res.err;
 
                 localStorage.setItem('user', res.username);
                 localStorage.setItem('auth', res.token);
