@@ -1,24 +1,21 @@
 const baseUrl = 'http://localhost:5000/api/articles';
 
-const postOptions = (data) => {
-    console.log(localStorage['auth']);
-    return {
+const create = (articleData) => {
+    const token = localStorage['auth'];
+    
+    return fetch(baseUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(data)
-    }
-}
-
-const create = (articleData) => {
-    // Validate data
-    return fetch(baseUrl, postOptions(articleData))
-        .then(res => res.json())
+        body: JSON.stringify(articleData)
+    })
+    .then(res => res.json())
 }
 
 const getAll = (category) => {
-    return fetch(`${baseUrl}/${category}`)
+    return fetch(`${baseUrl}/category/${category}`)
         .then(res => res.json());
 }
 

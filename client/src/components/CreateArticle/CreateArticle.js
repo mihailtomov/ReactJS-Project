@@ -30,8 +30,10 @@ class CreateArticle extends Component {
             imageUrl,
             category,
             author
-        }).then(() => {
-            this.setState({ articleCreated: true });
+        }).then(res => {
+            if (!res.message) {
+                this.setState({ articleCreated: true });
+            }
         })
     }
 
