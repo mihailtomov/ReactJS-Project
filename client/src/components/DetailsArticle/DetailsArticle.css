@@ -1,29 +1,34 @@
-article.details-article { 
+.details-article { 
     padding: 10px 0;
 }
 
-article.details-article h3 {
+.details-article h3 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 22px;
     margin-bottom: 20px;
 }
 
-article.details-article img {
+.details-article img {
     width: 250px;
     margin-bottom: 20px;
 }
 
-article.details-article p.description {
+.details-article p.description {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     margin-bottom: 40px;
 }
 
-article.details-article a.read-more {
+.details-article a.read-more {
     text-decoration: none;
 }
 
-article.details-article span.author-name {
+.details-article span.author-name {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
+}
+
+.details-article time[datetime] {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
 }

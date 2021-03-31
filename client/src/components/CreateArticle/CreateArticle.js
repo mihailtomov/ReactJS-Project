@@ -1,3 +1,5 @@
+import './CreateArticle.css';
+
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
@@ -42,10 +44,10 @@ class CreateArticle extends Component {
 
     render() {
         if (this.state.articleCreated) {
-            return <Redirect to="/" />
+            return <Redirect to="/categories/all" />
         } else {
             return (
-                <section>
+                <section className="create-article">
                     <h2>Create new article</h2>
                     <div>
                         <form onSubmit={this.onSubmitHandler}>

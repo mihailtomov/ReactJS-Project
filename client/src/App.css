@@ -28,24 +28,3 @@ div.container {
     border-left: 1px solid lightseagreen;
     border-right: 1px solid lightseagreen;
 }
-
-input[type=text], input[type=password], input[type=submit] {
-    display: block;
-    margin: 10px 0px;
-    padding: 5px;
-}
-
-input[name=title], input[name=imageUrl] {
-    width: 500px;
-}
-
-input[type=submit] {
-    padding: 5px 10px;
-    font-size: 16px;
-}
-
-label {
-    display: block;
-    margin-top: 20px;
-    font-size: 18px;
-}

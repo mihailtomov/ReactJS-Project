@@ -11,23 +11,21 @@
     font-size: 30px;
     padding: 10px;
     margin: 0 -10px;
-    /* background-color: rgb(207, 237, 247); */
 }
 
-.main-wrapper time[datetime] {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
+.main-wrapper input[type=text], input[type=password], input[type=submit] {
+    display: block;
+    margin: 10px 0px;
+    padding: 5px;
 }
 
-.main-wrapper textarea[name=content] {
-    resize: vertical;
-    width: 70%;
-    min-height: 300px;
-    margin-top: 10px;
+.main-wrapper input[type=submit] {
+    padding: 5px 10px;
+    font-size: 16px;
 }
 
-.main-wrapper select[name=category] {
-    margin-top: 10px;
-    width: 140px;
-    height: 26px;
+.main-wrapper label {
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
 }
