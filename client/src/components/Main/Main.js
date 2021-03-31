@@ -1,7 +1,7 @@
 import './Main.css';
 
 import { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from '../Home/Home.js';
 import Register from '../Register/Register.js';
@@ -17,7 +17,7 @@ class Main extends Component {
             <main className="main-wrapper">
                 <Switch>
                     <Route path="/" exact>
-                        <Home loggedInStateHandler={this.props.loggedInStateHandler} />
+                        <Redirect to="/categories/all" />
                     </Route>
 
                     <Route
