@@ -6,7 +6,7 @@ const AsideMenu = () => {
     return (
         <aside className="aside-menu">
             <div>
-                <img src="../logo192.png" alt="" />
+                <img src="../../logo192.png" alt="" />
             </div>
             <nav>
                 <Link to="/categories/all">Home</Link>

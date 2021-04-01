@@ -1,24 +1,19 @@
-article.home-article { 
-    padding: 30px 0 10px 0;
+.home-article { 
+    padding: 20px 0 10px 0;
 }
 
-article.home-article h3 {
+.home-article h3 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 22px;
     margin-bottom: 20px;
 }
 
-article.home-article p.description {
+.home-article p.description {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     margin-bottom: 23px;
 }
 
-article.home-article a.read-more {
+.home-article a.read-more {
     text-decoration: none;
-}
-
-article.home-article span.author-name {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
 }

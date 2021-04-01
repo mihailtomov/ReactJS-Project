@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
-
 import './HomeArticle.css';
+
+import { Link } from 'react-router-dom';
 
 const HomeArticle = ({
     title,
     content,
-    author,
     _id,
 }) => {
     return (
@@ -15,9 +14,6 @@ const HomeArticle = ({
                 {content.slice(0, 150)}&hellip;
                 <Link className="read-more" to={`/article/details/${_id}`}>read more</Link>
             </p>
-            <div>
-                <span className="author-name">Published by <strong>{author}</strong></span>
-            </div>
         </article>
     );
 }

@@ -26,7 +26,11 @@ class Main extends Component {
                     />
 
                     <Route path="/article/create">
-                        <CreateArticle loggedInStateHandler={this.props.loggedInStateHandler} />
+                        {
+                            localStorage['auth'] ? 
+                            <CreateArticle loggedInStateHandler={this.props.loggedInStateHandler} /> :
+                            <Redirect to="/categories/all" />
+                        }
                     </Route>
 
                     <Route path="/article/details/:articleId" component={DetailsArticle} />
@@ -42,7 +46,6 @@ class Main extends Component {
                 </Switch>
             </main>
         )
-
     }
 }
 

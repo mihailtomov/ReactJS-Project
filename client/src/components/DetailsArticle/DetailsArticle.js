@@ -14,6 +14,7 @@ const DetailsArticle = (
     const [date, setDate] = useState('');
 
     useEffect(() => {
+        console.log('details');
         const { articleId } = match.params;
 
         articleService.getOne(articleId)
@@ -29,7 +30,7 @@ const DetailsArticle = (
                 setDate(date);
             })
             .catch(err => console.log(err))
-    });
+    }, []);
 
     return (
         <section>
