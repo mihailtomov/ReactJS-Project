@@ -30,11 +30,19 @@
     font-size: 18px;
 }
 
-input[name=username]:invalid {
-    outline-color: red;
+input[name=username], input[name=password], input[name=repeatPassword]:invalid {
+    outline-color: rgb(231, 104, 104);
 }
 
 input[name=username]:valid {
+    outline-color: black;
+}
+
+input[name=password]:valid {
+    outline-color: black;
+}
+
+input[name=repeatPassword]:valid {
     outline-color: black;
 }
 

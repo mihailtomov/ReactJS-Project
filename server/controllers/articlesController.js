@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const articlesService = require('../services/articlesService');
-const {isAuth} = require('../middlewares/authorization');
+const { isAuth } = require('../middlewares/authorization');
 
 router.post('/', isAuth, (req, res, next) => {
     articlesService.create(req.body)

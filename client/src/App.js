@@ -7,6 +7,8 @@ import Header from './components/Header/Header.js';
 import Main from './components/Main/Main.js';
 import Footer from './components/Footer/Footer.js';
 
+import authService from './services/authService';
+
 class App extends Component {
     constructor() {
         super();
@@ -18,7 +20,17 @@ class App extends Component {
     }
 
     loggedInStateHandler = () => {
-        this.setState({ loggedIn: true, username: localStorage['user'] });
+        const token = localStorage['auth'];
+
+        authService.validateToken(token)
+            .then(res => {
+                if (!res.err) {
+                    this.setState({ loggedIn: true, username: localStorage['user'] });
+                } else {
+                    localStorage.clear();
+                    this.setState({ loggedIn: false });
+                }
+            })
     }
 
     loggedOutStateHandler = () => {

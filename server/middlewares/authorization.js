@@ -21,7 +21,7 @@ const auth = (req, res, next) => {
 
 const isAuth = (req, res, next) => {
     if (!req.user) {
-        res.status(401).json({ message: 'You cannot perform this action!' });
+        res.status(401).json({ err: { message: 'You cannot perform this action!' } });
         return;
     }
 

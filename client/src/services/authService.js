@@ -3,6 +3,7 @@ const baseUrl = 'http://localhost:5000/api/auth';
 const endpoints = {
     register: `${baseUrl}/register`,
     login: `${baseUrl}/login`,
+    validate: `${baseUrl}/validate`,
 }
 
 const postOptions = (data) => {
@@ -39,9 +40,21 @@ const login = ({ username, password }) => {
     }
 }
 
+const validateToken = (token) => {
+    return fetch(endpoints.validate, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(res => res.json())
+}
+
 const authService = {
     register,
     login,
+    validateToken,
 }
 
 export default authService;

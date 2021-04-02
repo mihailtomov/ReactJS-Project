@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const authService = require('../services/authService');
+const { isAuth } = require('../middlewares/authorization');
 
 router.post('/register', (req, res, next) => {
     authService.register(req.body)
@@ -16,6 +17,10 @@ router.post('/login', (req, res, next) => {
             res.status(200).json(userInfo);
         })
         .catch(next);
+});
+
+router.get('/validate', isAuth, (req, res) => {
+    res.status(200).json({ message: 'validated' });
 });
 
 module.exports = router;

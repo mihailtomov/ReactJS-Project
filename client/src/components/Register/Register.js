@@ -12,38 +12,38 @@ class Register extends Component {
             password: '',
             repeatPassword: '',
             registered: false,
-            usernameErrors: ['error'],
-            passwordErrors: ['error'],
-            repeatPasswordErrors: ['error'],
+            // usernameErrors: ['error'],
+            // passwordErrors: ['error'],
+            // repeatPasswordErrors: ['error'],
         }
     }
 
     onChangeHandler = (e) => {
-        const inputLength = e.target.value.length;
+        // const inputLength = e.target.value.length;
 
-        switch (e.target.name) {
-            case 'username':
-                if (inputLength > 0 && inputLength < 3) {
-                    this.setState({ usernameErrors: ['error', 'minLength'] });
-                } else {
-                    this.setState({ usernameErrors: ['error'] });
-                }
-                break;
-            case 'password':
-                if (inputLength > 0 && inputLength < 6) {
-                    this.setState({ passwordErrors: ['error', 'minLength'] });
-                } else {
-                    this.setState({ passwordErrors: ['error'] });
-                }
-                break;
-            default:
-                if (inputLength > 0 && inputLength < 6) {
-                    this.setState({ repeatPasswordErrors: ['error', 'minLength'] });
-                } else {
-                    this.setState({ repeatPasswordErrors: ['error'] });
-                }
-                break;
-        }
+        // switch (e.target.name) {
+        //     case 'username':
+        //         if (inputLength > 0 && inputLength < 3) {
+        //             this.setState({ usernameErrors: ['error', 'minLength'] });
+        //         } else {
+        //             this.setState({ usernameErrors: ['error'] });
+        //         }
+        //         break;
+        //     case 'password':
+        //         if (inputLength > 0 && inputLength < 6) {
+        //             this.setState({ passwordErrors: ['error', 'minLength'] });
+        //         } else {
+        //             this.setState({ passwordErrors: ['error'] });
+        //         }
+        //         break;
+        //     default:
+        //         if (inputLength > 0 && inputLength < 6) {
+        //             this.setState({ repeatPasswordErrors: ['error', 'minLength'] });
+        //         } else {
+        //             this.setState({ repeatPasswordErrors: ['error'] });
+        //         }
+        //         break;
+        // }
 
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -69,8 +69,8 @@ class Register extends Component {
             usernameErrors,
             passwordErrors,
             repeatPasswordErrors
-        } 
-        = this.state;
+        }
+            = this.state;
 
         if (registered) {
             return <Redirect to="/login" />
@@ -82,14 +82,41 @@ class Register extends Component {
                 <div>
                     <form onSubmit={this.onSubmitHandler}>
                         <label htmlFor="username">Username:</label>
-                        <input type="text" name="username" id="username" value={username} onChange={this.onChangeHandler} minLength="3" maxLength="12" />
-                        <span className={usernameErrors.join(' ')}>username needs to be at least 3 characters long</span>
+                        <input type="text"
+                            name="username"
+                            id="username"
+                            value={username}
+                            onChange={this.onChangeHandler}
+                            minLength="3"
+                            maxLength="12"
+                            required
+                        />
+                        {/* <span className={usernameErrors.join(' ')}>username needs to be at least 3 characters long</span> */}
+
                         <label htmlFor="password">Password:</label>
-                        <input type="password" name="password" id="password" value={password} onChange={this.onChangeHandler} minLength="6" maxLength="20" />
-                        <span className={passwordErrors.join(' ')}>password needs to be at least 6 characters long</span>
+                        <input type="password"
+                            name="password"
+                            id="password"
+                            value={password}
+                            onChange={this.onChangeHandler}
+                            minLength="6"
+                            maxLength="20"
+                            required
+                        />
+                        {/* <span className={passwordErrors.join(' ')}>password needs to be at least 6 characters long</span> */}
+
                         <label htmlFor="repeatPassword">Repeat password:</label>
-                        <input type="password" name="repeatPassword" id="repeatPassword" value={repeatPassword} onChange={this.onChangeHandler} />
-                        <span className={repeatPasswordErrors.join(' ')}>repeat password needs to be at least 6 characters long</span>
+                        <input type="password"
+                            name="repeatPassword"
+                            id="repeatPassword"
+                            value={repeatPassword}
+                            onChange={this.onChangeHandler}
+                            minLength="6"
+                            maxLength="20"
+                            required
+                        />
+                        {/* <span className={repeatPasswordErrors.join(' ')}>repeat password needs to be at least 6 characters long</span> */}
+
                         <input type="submit" value="Register" />
                     </form>
                 </div>
