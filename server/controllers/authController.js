@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
 const authService = require('../services/authService');
-const { isAuth } = require('../middlewares/authorization');
+const jwt = require('jsonwebtoken');
+const { SECRET } = require('../config/server');
 
 router.post('/register', (req, res, next) => {
     authService.register(req.body)
@@ -19,8 +20,16 @@ router.post('/login', (req, res, next) => {
         .catch(next);
 });
 
-router.get('/validate', isAuth, (req, res) => {
-    res.status(200).json({ message: 'validated' });
+router.get('/validate/:token', (req, res) => {
+    const { token } = req.params;
+
+    try {
+        jwt.verify(token, SECRET);
+
+        res.status(200).json({ message: 'validated' });
+    } catch (error) {
+        res.status(401).json({ err: { message: 'You cannot perform this action!' } });
+    }
 });
 
 module.exports = router;

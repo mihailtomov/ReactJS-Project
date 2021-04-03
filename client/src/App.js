@@ -28,7 +28,8 @@ class App extends Component {
                     this.setState({ loggedIn: true, username: localStorage['user'] });
                 } else {
                     localStorage.clear();
-                    this.setState({ loggedIn: false });
+
+                    this.setState({ loggedIn: false, username: '' });
                 }
             })
     }

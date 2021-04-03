@@ -41,14 +41,8 @@ const login = ({ username, password }) => {
 }
 
 const validateToken = (token) => {
-    return fetch(endpoints.validate, {
-        method: 'GET', 
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(res => res.json())
+    return fetch(endpoints.validate + `/${token}`)
+        .then(res => res.json())
 }
 
 const authService = {

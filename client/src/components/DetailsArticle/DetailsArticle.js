@@ -14,7 +14,6 @@ const DetailsArticle = (
     const [date, setDate] = useState('');
 
     useEffect(() => {
-        console.log('details');
         const { articleId } = match.params;
 
         articleService.getOne(articleId)
