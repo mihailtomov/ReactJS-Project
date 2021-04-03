@@ -1,0 +1,15 @@
+.comment-box {
+    margin: 15px 0;
+    font-family: Helvetica, sans-serif;
+    padding: 0 0 10px 5px;
+    background-color: #f4fffe;
+    border-radius: 3px;
+    border: 1px solid #64c0c3;
+    max-width: 500px;
+}
+
+.comment-box > div {
+    margin: 10px 0;
+    color: #6da2fd;
+    font-weight: bold;
+}

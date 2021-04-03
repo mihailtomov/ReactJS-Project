@@ -1,16 +1,20 @@
 const baseUrl = 'http://localhost:5000/api/articles';
 
-const create = (articleData) => {
+const postOptions = (data) => {
     const token = localStorage['auth'];
-    
-    return fetch(baseUrl, {
+
+    return {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(articleData)
-    })
+        body: JSON.stringify(data)
+    }
+}
+
+const create = (articleData) => {
+    return fetch(baseUrl, postOptions(articleData))
     .then(res => res.json())
 }
 
@@ -24,10 +28,16 @@ const getOne = (articleId) => {
         .then(res => res.json());
 }
 
+const postComment = (commentData) => {
+    return fetch(`${baseUrl}/comments`, postOptions(commentData))
+        .then(res => res.json());
+}
+
 const articleService = {
     create,
     getAll,
     getOne,
+    postComment,
 }
 
 export default articleService;

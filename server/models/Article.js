@@ -7,6 +7,10 @@ const articleSchema = mongoose.Schema({
     category: String,
     author: String,
     date: String,
+    comments: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Comment'
+    }],
 });
 
 module.exports = mongoose.model('Article', articleSchema);

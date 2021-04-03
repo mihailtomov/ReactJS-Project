@@ -27,13 +27,16 @@ class Main extends Component {
 
                     <Route path="/article/create">
                         {
-                            localStorage['auth'] ? 
-                            <CreateArticle loggedInStateHandler={this.props.loggedInStateHandler} /> :
-                            <Redirect to="/categories/all" />
+                            localStorage['auth'] ?
+                                <CreateArticle loggedInStateHandler={this.props.loggedInStateHandler} /> :
+                                <Redirect to="/categories/all" />
                         }
                     </Route>
 
-                    <Route path="/article/details/:articleId" component={DetailsArticle} />
+                    <Route
+                        path="/article/details/:articleId"
+                        render={(props) => <DetailsArticle {...props} loggedInStateHandler={this.props.loggedInStateHandler} />}
+                    />
 
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />

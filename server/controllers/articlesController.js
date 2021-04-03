@@ -10,6 +10,14 @@ router.post('/', isAuth, (req, res, next) => {
         .catch(next);
 });
 
+router.post('/comments', isAuth, (req, res, next) => {
+    articlesService.addComment(req.body)
+        .then(createdComment => {
+            res.status(201).json({_id: createdComment._id})
+        })
+        .catch(next);
+});
+
 router.get('/:articleId', (req, res, next) => {
     const { articleId } = req.params;
 

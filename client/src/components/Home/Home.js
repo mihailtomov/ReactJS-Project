@@ -14,8 +14,6 @@ const Home = (
     const [category, setCategory] = useState('all');
 
     useEffect(() => {
-        if (localStorage['auth']) loggedInStateHandler();
-
         articleService.getAll(category)
             .then(res => {
                 if (res.err) throw res.err;
@@ -32,6 +30,10 @@ const Home = (
             setCategory(match.params.category)
         };
     })
+
+    useEffect(() => {
+        if (localStorage['auth']) loggedInStateHandler();
+    }, [])
 
     if (articles.length > 0) {
         return <HomeArticleList articles={articles} />

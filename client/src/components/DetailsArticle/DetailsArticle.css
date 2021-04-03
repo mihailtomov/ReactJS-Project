@@ -8,6 +8,11 @@
     margin-bottom: 20px;
 }
 
+.details-article h4 {
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
 .details-article img {
     width: 250px;
     margin-bottom: 20px;
@@ -31,4 +36,27 @@
 .details-article time[datetime] {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
+}
+
+.details-article form {
+    margin-top: 20px;
+}
+
+.details-article label {
+    font-size: 16px;
+    display: block;
+    margin: 10px 0;
+}
+
+.details-article input[type=submit] {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.details-article input[name=name] {
+    width: 487px;
+}
+
+.details-article textarea[name=comment] {
+    width: 500px;
 }

@@ -1,4 +1,5 @@
 const Article = require('../models/Article');
+const Comment = require('../models/Comment');
 
 const create = (articleData) => {
     const options = { year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit' };
@@ -19,11 +20,26 @@ const getAll = (category) => {
 }
 
 const getOne = (articleId) => {
-    return Article.findOne({ _id: articleId });
+    return Article.findOne({ _id: articleId }).populate('comments');
+}
+
+const addComment = ({articleId, name, comment}) => {
+    const newComment = new Comment({name, comment});
+
+    return Article.findOne({_id: articleId})
+        .then(article => {
+            article.comments.push(newComment);
+
+            return article.save();
+        })
+        .then(() => {
+            return newComment.save();
+        })
 }
 
 module.exports = {
     create,
     getAll,
     getOne,
+    addComment,
 }
