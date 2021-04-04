@@ -3,7 +3,8 @@ import './DetailsArticle.css';
 import { useState, useEffect } from 'react';
 
 import articleService from '../../services/articleService';
-import Comment from '../DetailsArticle/Comment/Comment.js';
+import GuestDetailsArticle from './GuestDetailsArticle/GuestDetailsArticle.js';
+import AuthDetailsArticle from './AuthDetailsArticle/AuthDetailsArticle.js';
 
 const DetailsArticle = (
     {
@@ -48,7 +49,7 @@ const DetailsArticle = (
     const onCommentSubmitHandler = (e) => {
         e.preventDefault();
 
-        const name = e.target.name.value;
+        const name = localStorage['user'];
         const comment = e.target.comment.value;
 
         articleService.postComment({ articleId: _id, name, comment })
@@ -60,36 +61,31 @@ const DetailsArticle = (
             .catch(err => console.log(err));
     }
 
+    if (!localStorage['auth']) {
+        return (
+            <section className="details-article">
+                <GuestDetailsArticle
+                    title={title}
+                    imageUrl={imageUrl}
+                    content={content}
+                    author={author}
+                    date={date}
+                />
+            </section>
+        );
+    }
+
     return (
         <section className="details-article">
-
-            <article>
-                <h3>{title}</h3>
-                <img src={imageUrl} alt="" />
-                <p className="description">
-                    {content}
-                </p>
-                <div>
-                    <span className="author-name">Published by <strong>{author}</strong></span>
-                    <p>
-                        <time dateTime={date}>{date}</time>
-                    </p>
-                </div>
-            </article>
-            
-            <h4>Comments</h4>
-            <div>
-                {comments.map(c => <Comment key={c._id} name={c.name} comment={c.comment} />)}
-            </div>
-
-            <form onSubmit={onCommentSubmitHandler}>
-                <label htmlFor="name">Name:</label>
-                <input type="text" name="name" id="name" />
-                <label htmlFor="comment">Comment: </label>
-                <textarea name="comment" id="comment" cols="30" rows="8"></textarea>
-                <input type="submit" value="Add comment" />
-            </form>
-
+            <AuthDetailsArticle
+                title={title}
+                imageUrl={imageUrl}
+                content={content}
+                author={author}
+                date={date}
+                comments={comments}
+                onCommentSubmitHandler={onCommentSubmitHandler}
+            />
         </section>
     );
 }
