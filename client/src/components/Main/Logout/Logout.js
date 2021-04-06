@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Logout = (props) => {
+import AuthContext from '../../../AuthContext'
+
+const Logout = () => {
+    const { loggedOutStateHandler } = useContext(AuthContext);
+
     localStorage.clear();
 
     setTimeout(() => {
-        props.loggedOutStateHandler();
+        loggedOutStateHandler();
     }, 20);
 
     return (

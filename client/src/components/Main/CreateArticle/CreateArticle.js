@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 
 import articleService from '../../../services/articleService';
 
+import AuthContext from '../../../AuthContext';
+
 class CreateArticle extends Component {
     constructor() {
         super();
@@ -14,7 +16,7 @@ class CreateArticle extends Component {
         }
     }
     componentDidMount() {
-        if (localStorage['auth']) this.props.loggedInStateHandler();
+        if (localStorage['auth']) this.context.loggedInStateHandler();
     }
 
     onSubmitHandler = (e) => {
@@ -77,5 +79,7 @@ class CreateArticle extends Component {
         }
     }
 }
+
+CreateArticle.contextType = AuthContext;
 
 export default CreateArticle;

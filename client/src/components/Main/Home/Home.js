@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 import HomeArticleList from './HomeArticleList/HomeArticleList.js';
 
 import articleService from '../../../services/articleService';
 
+import AuthContext from '../../../AuthContext';
+
 const Home = (
     {
-        loggedInStateHandler,
         match,
     }
 ) => {
+    const { loggedInStateHandler } = useContext(AuthContext);
+
     const [articles, setArticles] = useState([]);
     const [category, setCategory] = useState('all');
-    
+
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
     }, [])

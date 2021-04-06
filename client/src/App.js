@@ -9,6 +9,8 @@ import Footer from './components/Footer/Footer.js';
 
 import authService from './services/authService';
 
+import AuthContext from './AuthContext';
+
 const App = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
@@ -33,6 +35,11 @@ const App = () => {
         setLoggedIn(false);
     }
 
+    const context = {
+        loggedInStateHandler,
+        loggedOutStateHandler,
+    }
+
     return (
         <div className="site-wrapper">
 
@@ -41,10 +48,9 @@ const App = () => {
             <div className="container">
                 <Header loggedIn={loggedIn} username={username} />
 
-                <Main
-                    loggedInStateHandler={loggedInStateHandler}
-                    loggedOutStateHandler={loggedOutStateHandler}
-                />
+                <AuthContext.Provider value={context}>
+                    <Main />
+                </AuthContext.Provider>
 
                 <Footer />
             </div>

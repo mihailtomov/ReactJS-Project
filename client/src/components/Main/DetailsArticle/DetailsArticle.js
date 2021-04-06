@@ -1,17 +1,20 @@
 import './DetailsArticle.css';
 
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 import articleService from '../../../services/articleService';
 import GuestDetailsArticle from './GuestDetailsArticle/GuestDetailsArticle.js';
 import AuthDetailsArticle from './AuthDetailsArticle/AuthDetailsArticle.js';
 
+import AuthContext from '../../../AuthContext';
+
 const DetailsArticle = (
     {
         match,
-        loggedInStateHandler
     }
 ) => {
+    const { loggedInStateHandler } = useContext(AuthContext);
+
     const [title, setTitle] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [content, setContent] = useState('');
