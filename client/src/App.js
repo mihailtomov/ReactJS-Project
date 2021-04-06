@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Component } from 'react';
+import { useState } from 'react';
 
 import AsideMenu from './components/AsideMenu/AsideMenu.js';
 import Header from './components/Header/Header.js';
@@ -9,55 +9,48 @@ import Footer from './components/Footer/Footer.js';
 
 import authService from './services/authService';
 
-class App extends Component {
-    constructor() {
-        super();
+const App = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
 
-        this.state = {
-            loggedIn: false,
-            username: '',
-        }
-    }
-
-    loggedInStateHandler = () => {
+    const loggedInStateHandler = () => {
         const token = localStorage['auth'];
 
         authService.validateToken(token)
             .then(res => {
                 if (!res.err) {
-                    this.setState({ loggedIn: true, username: localStorage['user'] });
+                    setLoggedIn(true);
+                    setUsername(localStorage['user']);
                 } else {
                     localStorage.clear();
-
-                    this.setState({ loggedIn: false, username: '' });
+                    setLoggedIn(false);
+                    setUsername('');
                 }
             })
     }
 
-    loggedOutStateHandler = () => {
-        this.setState({ loggedIn: false });
+    const loggedOutStateHandler = () => {
+        setLoggedIn(false);
     }
 
-    render() {
-        return (
-            <div className="site-wrapper">
+    return (
+        <div className="site-wrapper">
 
-                <AsideMenu />
+            <AsideMenu />
 
-                <div className="container">
-                    <Header loggedIn={this.state.loggedIn} username={this.state.username} />
+            <div className="container">
+                <Header loggedIn={loggedIn} username={username} />
 
-                    <Main
-                        loggedInStateHandler={this.loggedInStateHandler}
-                        loggedOutStateHandler={this.loggedOutStateHandler}
-                    />
+                <Main
+                    loggedInStateHandler={loggedInStateHandler}
+                    loggedOutStateHandler={loggedOutStateHandler}
+                />
 
-                    <Footer />
-                </div>
-
+                <Footer />
             </div>
-        );
-    }
+
+        </div>
+    );
 }
 
 export default App;

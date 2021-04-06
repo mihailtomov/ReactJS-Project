@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import authService from '../../services/authService';
+import authService from '../../../services/authService';
 
 class Login extends Component {
     constructor() {
@@ -30,7 +30,7 @@ class Login extends Component {
 
                 setTimeout(() => {
                     this.setState({ loggedIn: true });
-                }, 500)
+                }, 20)
             })
             .catch(err => console.log(err))
     }

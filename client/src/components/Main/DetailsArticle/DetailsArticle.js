@@ -2,7 +2,7 @@ import './DetailsArticle.css';
 
 import { useState, useEffect } from 'react';
 
-import articleService from '../../services/articleService';
+import articleService from '../../../services/articleService';
 import GuestDetailsArticle from './GuestDetailsArticle/GuestDetailsArticle.js';
 import AuthDetailsArticle from './AuthDetailsArticle/AuthDetailsArticle.js';
 

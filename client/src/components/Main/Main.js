@@ -3,13 +3,13 @@ import './Main.css';
 import { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Home from '../Home/Home.js';
-import Register from '../Register/Register.js';
-import Login from '../Login/Login.js';
-import NotFound from '../NotFound/NotFound.js';
-import Logout from '../Logout/Logout.js';
-import CreateArticle from '../CreateArticle/CreateArticle.js';
-import DetailsArticle from '../DetailsArticle/DetailsArticle.js';
+import Home from './Home/Home.js';
+import Register from './Register/Register.js';
+import Login from './Login/Login.js';
+import NotFound from './NotFound/NotFound.js';
+import Logout from './Logout/Logout.js';
+import CreateArticle from './CreateArticle/CreateArticle.js';
+import DetailsArticle from './DetailsArticle/DetailsArticle.js';
 
 class Main extends Component {
     render() {

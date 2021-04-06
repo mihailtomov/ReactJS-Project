@@ -3,7 +3,7 @@ import './CreateArticle.css';
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import articleService from '../../services/articleService';
+import articleService from '../../../services/articleService';
 
 class CreateArticle extends Component {
     constructor() {

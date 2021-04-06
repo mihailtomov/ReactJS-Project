@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import HomeArticleList from './HomeArticleList/HomeArticleList.js';
 
-import articleService from '../../services/articleService';
+import articleService from '../../../services/articleService';
 
 const Home = (
     {
@@ -12,6 +12,10 @@ const Home = (
 ) => {
     const [articles, setArticles] = useState([]);
     const [category, setCategory] = useState('all');
+    
+    useEffect(() => {
+        if (localStorage['auth']) loggedInStateHandler();
+    }, [])
 
     useEffect(() => {
         articleService.getAll(category)
@@ -30,10 +34,6 @@ const Home = (
             setCategory(match.params.category)
         };
     })
-
-    useEffect(() => {
-        if (localStorage['auth']) loggedInStateHandler();
-    }, [])
 
     if (articles.length > 0) {
         return <HomeArticleList articles={articles} />
