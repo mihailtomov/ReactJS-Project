@@ -18,17 +18,19 @@ const App = () => {
     const loggedInStateHandler = () => {
         const token = localStorage['auth'];
 
-        authService.validateToken(token)
-            .then(res => {
-                if (!res.err) {
-                    setLoggedIn(true);
-                    setUsername(localStorage['user']);
-                } else {
-                    localStorage.clear();
-                    setLoggedIn(false);
-                    setUsername('');
-                }
-            })
+        if (token) {
+            authService.validateToken(token)
+                .then(res => {
+                    if (!res.err) {
+                        setLoggedIn(true);
+                        setUsername(localStorage['user']);
+                    } else {
+                        localStorage.clear();
+                        setLoggedIn(false);
+                        setUsername('');
+                    }
+                })
+        }
     }
 
     const loggedOutStateHandler = () => {

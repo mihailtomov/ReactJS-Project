@@ -3,7 +3,7 @@ const baseUrl = 'http://localhost:5000/api/auth';
 const endpoints = {
     register: `${baseUrl}/register`,
     login: `${baseUrl}/login`,
-    validate: `${baseUrl}/validate`,
+    validateToken: `${baseUrl}/validate-token`,
 }
 
 const postOptions = (data) => {
@@ -41,8 +41,13 @@ const login = ({ username, password }) => {
 }
 
 const validateToken = (token) => {
-    return fetch(endpoints.validate + `/${token}`)
-        .then(res => res.json())
+    return fetch(endpoints.validateToken, {
+        method: 'GET', 
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(res => res.json());
 }
 
 const authService = {

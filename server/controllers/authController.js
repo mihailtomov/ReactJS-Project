@@ -1,8 +1,6 @@
 const router = require('express').Router();
 
 const authService = require('../services/authService');
-const jwt = require('jsonwebtoken');
-const { SECRET } = require('../config/server');
 
 router.post('/register', (req, res, next) => {
     authService.register(req.body)
@@ -20,14 +18,10 @@ router.post('/login', (req, res, next) => {
         .catch(next);
 });
 
-router.get('/validate/:token', (req, res) => {
-    const { token } = req.params;
-
-    try {
-        jwt.verify(token, SECRET);
-
-        res.status(200).json({ message: 'validated' });
-    } catch (error) {
+router.get('/validate-token', (req, res) => {
+    if (req.user) {
+        res.status(200).json({ message: 'Token validated!' });
+    } else {
         res.status(401).json({ err: { message: 'You cannot perform this action!' } });
     }
 });
