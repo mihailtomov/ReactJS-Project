@@ -39,6 +39,7 @@ const App = () => {
 
     const context = {
         loggedIn,
+        username,
         loggedInStateHandler,
         loggedOutStateHandler,
     }

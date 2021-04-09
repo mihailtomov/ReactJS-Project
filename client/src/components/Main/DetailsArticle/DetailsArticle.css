@@ -5,7 +5,8 @@
 .details-article h3 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 22px;
-    margin-bottom: 20px;
+    display: inline-block;
+    margin: 0 725px 25px 0;
 }
 
 .details-article h4 {
@@ -37,6 +38,22 @@
 
 .details-article a.read-more {
     text-decoration: none;
+}
+
+.details-article div.user-control {
+    display: inline-block;
+}
+
+.details-article a.user-btn {
+    text-decoration: none;
+    padding: 0 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+}
+
+.details-article a.user-btn:hover {
+    color: rgb(97, 218, 251);
 }
 
 .details-article span.author-name {

@@ -3,12 +3,13 @@ import Comment from '../Comment/Comment.js';
 
 const AuthDetailsArticle = (
     {
-        title, content, imageUrl, youtubeUrl, author, date, comments, onCommentSubmitHandler
+        _id, title, content, imageUrl, youtubeUrl, author, date, comments, onCommentSubmitHandler
     }
 ) => {
     return (
         <>
             <GuestDetailsArticle
+                _id={_id}
                 title={title}
                 content={content}
                 imageUrl={imageUrl}
@@ -21,7 +22,7 @@ const AuthDetailsArticle = (
             <div>
                 {
                     comments.map(c =>
-                        <Comment key={c._id} name={c.name} comment={c.comment} />
+                        <Comment key={c._id} name={c.name} comment={c.comment} date={c.date} number={c.number} />
                     )
                 }
             </div>

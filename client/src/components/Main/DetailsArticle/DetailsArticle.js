@@ -84,6 +84,7 @@ const DetailsArticle = (
     return (
         <section className="details-article">
             <AuthDetailsArticle
+                _id={_id}
                 title={title}
                 content={content}
                 imageUrl={imageUrl}

@@ -4,12 +4,16 @@ const Comment = (
     {
         name,
         comment,
+        date,
+        number,
     }
 ) => {
     return (
         <div className="comment-box">
-            <div>{name}</div>
-            <p>{comment}</p>
+            <var className="comment-number">{number}</var>
+            <div className="comment-name">{name}</div>
+            <time className="comment-date" dateTime={date}>{date}</time>
+            <p className="comment-description">{comment}</p>
         </div>
     );
 }

@@ -7,6 +7,10 @@ const userSchema = mongoose.Schema({
     password: {
         type: String
     },
+    comments: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Comment'
+    }],
 });
 
 module.exports = mongoose.model('User', userSchema);
