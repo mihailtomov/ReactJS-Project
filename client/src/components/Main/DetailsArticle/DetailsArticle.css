@@ -1,4 +1,4 @@
-.details-article { 
+.details-article {
     padding: 10px 0;
 }
 
@@ -14,8 +14,20 @@
 }
 
 .details-article img {
-    width: 250px;
-    margin-bottom: 20px;
+    /* width: 250px;
+    margin-bottom: 20px; */
+    float: left;
+    width: 300px;
+    height: 282px;
+    object-fit: cover;
+}
+
+.details-article iframe {
+    margin: 0 0 20px 90px;
+}
+
+.details-article div.visual-section {
+    margin-bottom: 12px;
 }
 
 .details-article p.description {

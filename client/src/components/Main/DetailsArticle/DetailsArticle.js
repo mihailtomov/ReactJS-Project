@@ -13,11 +13,12 @@ const DetailsArticle = (
         match,
     }
 ) => {
-    const { loggedInStateHandler } = useContext(AuthContext);
+    const { loggedIn, loggedInStateHandler } = useContext(AuthContext);
 
     const [title, setTitle] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
     const [content, setContent] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
+    const [youtubeUrl, setYoutubeUrl] = useState('');
     const [author, setAuthor] = useState('');
     const [date, setDate] = useState('');
     const [_id, set_id] = useState('');
@@ -35,11 +36,12 @@ const DetailsArticle = (
             .then(res => {
                 if (res.err) throw res.err;
 
-                const { _id, title, imageUrl, content, author, date, comments } = res;
+                const { _id, title, content, imageUrl, youtubeUrl, author, date, comments } = res;
 
                 setTitle(title);
                 setContent(content);
                 setImageUrl(imageUrl);
+                setYoutubeUrl(youtubeUrl);
                 setAuthor(author);
                 setDate(date);
                 set_id(_id);
@@ -64,13 +66,14 @@ const DetailsArticle = (
             .catch(err => console.log(err));
     }
 
-    if (!localStorage['auth']) {
+    if (!loggedIn) {
         return (
             <section className="details-article">
                 <GuestDetailsArticle
                     title={title}
-                    imageUrl={imageUrl}
                     content={content}
+                    imageUrl={imageUrl}
+                    youtubeUrl={youtubeUrl}
                     author={author}
                     date={date}
                 />
@@ -82,8 +85,9 @@ const DetailsArticle = (
         <section className="details-article">
             <AuthDetailsArticle
                 title={title}
-                imageUrl={imageUrl}
                 content={content}
+                imageUrl={imageUrl}
+                youtubeUrl={youtubeUrl}
                 author={author}
                 date={date}
                 comments={comments}

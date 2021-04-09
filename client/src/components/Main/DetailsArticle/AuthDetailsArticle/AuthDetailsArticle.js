@@ -3,15 +3,16 @@ import Comment from '../Comment/Comment.js';
 
 const AuthDetailsArticle = (
     {
-        title, imageUrl, content, author, date, comments, onCommentSubmitHandler
+        title, content, imageUrl, youtubeUrl, author, date, comments, onCommentSubmitHandler
     }
 ) => {
     return (
         <>
             <GuestDetailsArticle
                 title={title}
-                imageUrl={imageUrl}
                 content={content}
+                imageUrl={imageUrl}
+                youtubeUrl={youtubeUrl}
                 author={author}
                 date={date}
             />

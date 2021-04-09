@@ -13,6 +13,7 @@ class CreateArticle extends Component {
 
         this.state = {
             articleCreated: false,
+            selectedFile: null,
         }
     }
     componentDidMount() {
@@ -24,16 +25,18 @@ class CreateArticle extends Component {
 
         const title = e.target.title.value;
         const content = e.target.content.value;
-        const imageUrl = e.target.imageUrl.value;
         const category = e.target.category.value;
+        const imageUrl = e.target.imageUrl.value;
+        const youtubeUrl = e.target.youtubeUrl.value;
         const author = localStorage['user'];
 
         articleService
             .create({
                 title,
                 content,
-                imageUrl,
                 category,
+                imageUrl,
+                youtubeUrl,
                 author
             })
             .then(res => {
@@ -53,14 +56,14 @@ class CreateArticle extends Component {
                     <h2>Create new article</h2>
                     <div>
                         <form onSubmit={this.onSubmitHandler}>
-                            <label htmlFor="title">Title</label>
+                            <label htmlFor="title">Title:</label>
                             <input type="text" name="title" id="title" placeholder="Title.." />
 
-                            <label htmlFor="content">Content</label>
+                            <label htmlFor="content">Content:</label>
                             <textarea name="content" id="content" placeholder="Description.."></textarea>
 
                             <div>
-                                <label htmlFor="category">Category</label>
+                                <label htmlFor="category">Category:</label>
                                 <select name="category" id="category" defaultValue="all">
                                     <option value="all">All</option>
                                     <option value="music">Music</option>
@@ -68,8 +71,11 @@ class CreateArticle extends Component {
                                 </select>
                             </div>
 
-                            <label htmlFor="imageUrl">Image URL</label>
+                            <label htmlFor="imageUrl">Image URL:</label>
                             <input type="text" name="imageUrl" id="imageUrl" placeholder="http://" />
+
+                            <label htmlFor="youtubeUrl">Youtube URL:</label>
+                            <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://" />
 
                             <input type="submit" value="Submit" />
                         </form>

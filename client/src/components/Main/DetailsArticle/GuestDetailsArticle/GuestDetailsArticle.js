@@ -1,12 +1,15 @@
 const GuestDetailsArticle = (
     {
-        title, imageUrl, content, author, date
+        title, imageUrl, youtubeUrl, content, author, date
     }
 ) => {
     return (
         <article>
             <h3>{title}</h3>
-            <img src={imageUrl} alt="" />
+            <div className="visual-section">
+                <img src={imageUrl} alt="" />
+                <iframe width="495" height="278" src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            </div>
             <p className="description">
                 {content}
             </p>

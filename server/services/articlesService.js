@@ -5,6 +5,7 @@ const create = (articleData) => {
     const options = { year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 
     articleData.date = new Date().toLocaleDateString('en-GB', options);
+    articleData.youtubeUrl = `https://www.youtube.com/embed/${articleData.youtubeUrl.split('=')[1]}`;
 
     const article = new Article(articleData);
 

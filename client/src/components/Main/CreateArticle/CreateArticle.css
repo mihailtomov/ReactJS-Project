@@ -1,4 +1,4 @@
-.create-article input[name=title], input[name=imageUrl] {
+.create-article input[name=title], input[name=imageUrl], input[name=youtubeUrl] {
     width: 500px;
 }
 
