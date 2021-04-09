@@ -74,7 +74,7 @@ class CreateArticle extends Component {
                             <label htmlFor="imageUrl">Image URL:</label>
                             <input type="text" name="imageUrl" id="imageUrl" placeholder="http://" />
 
-                            <label htmlFor="youtubeUrl">Youtube URL:</label>
+                            <label htmlFor="youtubeUrl">Youtube URL (optional):</label>
                             <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://" />
 
                             <input type="submit" value="Submit" />

@@ -20,26 +20,14 @@ class Main extends Component {
                         <Redirect to="/categories/all" />
                     </Route>
 
-                    <Route
-                        path="/categories/:category"
-                        render={(props) => <Home {...props} />}
-                    />
-
-                    <Route path="/article/create">
-                        { localStorage['auth'] ? <CreateArticle  /> : <Redirect to="/categories/all" /> }
-                    </Route>
-
-                    <Route
-                        path="/article/details/:articleId"
-                        render={(props) => <DetailsArticle {...props} />}
-                    />
-
+                    <Route path="/categories/:category" component={Home} />
+                    <Route path="/article/create" component={CreateArticle} />
+                    <Route path="/article/details/:articleId" component={DetailsArticle} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={Logout} />
 
                     <Route component={NotFound} />
-
                 </Switch>
             </main>
         )
