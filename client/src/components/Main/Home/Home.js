@@ -6,11 +6,9 @@ import articleService from '../../../services/articleService';
 
 import AuthContext from '../../../AuthContext';
 
-const Home = (
-    {
-        match,
-    }
-) => {
+const Home = ({
+    match,
+}) => {
     const { loggedInStateHandler } = useContext(AuthContext);
 
     const [articles, setArticles] = useState([]);

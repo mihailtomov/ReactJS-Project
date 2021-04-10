@@ -1,0 +1,16 @@
+.edit-article input[name=title], input[name=imageUrl], input[name=youtubeUrl] {
+    width: 500px;
+}
+
+.edit-article textarea[name=content] {
+    resize: vertical;
+    width: 70%;
+    min-height: 300px;
+    margin-top: 10px;
+}
+
+.edit-article select[name=category] {
+    margin-top: 10px;
+    width: 140px;
+    height: 26px;
+}

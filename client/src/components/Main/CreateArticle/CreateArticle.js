@@ -3,8 +3,8 @@ import './CreateArticle.css';
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import ArticleForm from '../ArticleForm/ArticleForm.js';
 import articleService from '../../../services/articleService';
-
 import AuthContext from '../../../AuthContext';
 
 class CreateArticle extends Component {
@@ -55,30 +55,7 @@ class CreateArticle extends Component {
                 <section className="create-article">
                     <h2>Create new article</h2>
                     <div>
-                        <form onSubmit={this.onSubmitHandler}>
-                            <label htmlFor="title">Title:</label>
-                            <input type="text" name="title" id="title" placeholder="Title.." />
-
-                            <label htmlFor="content">Content:</label>
-                            <textarea name="content" id="content" placeholder="Description.."></textarea>
-
-                            <div>
-                                <label htmlFor="category">Category:</label>
-                                <select name="category" id="category" defaultValue="all">
-                                    <option value="all">All</option>
-                                    <option value="music">Music</option>
-                                    <option value="gaming">Gaming</option>
-                                </select>
-                            </div>
-
-                            <label htmlFor="imageUrl">Image URL:</label>
-                            <input type="text" name="imageUrl" id="imageUrl" placeholder="http://" />
-
-                            <label htmlFor="youtubeUrl">Youtube URL (optional):</label>
-                            <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://" />
-
-                            <input type="submit" value="Submit" />
-                        </form>
+                        <ArticleForm onSubmitHandler={this.onSubmitHandler} />
                     </div>
                 </section>
             );

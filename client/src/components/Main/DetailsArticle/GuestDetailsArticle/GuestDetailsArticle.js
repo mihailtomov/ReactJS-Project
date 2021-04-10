@@ -1,19 +1,13 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import AuthContext from '../../../../AuthContext';
-
-const GuestDetailsArticle = (
-    {
-        _id, title, imageUrl, youtubeUrl, content, author, date
-    }
-) => {
-    const { username } = useContext(AuthContext);
+const GuestDetailsArticle = ({
+    _id, title, imageUrl, youtubeUrl, content, author, date
+}) => {
     return (
         <article>
             <h3>{title}</h3>
             {
-                author === username && <div className="user-control">
+                localStorage['user'] === author && <div className="user-control">
                     <Link className="user-btn" to={`/article/edit/${_id}`}>&#91;Edit&#93;</Link>
                     <Link className="user-btn" to={`/article/delete/${_id}`}>&#91;Delete&#93;</Link>
                 </div>

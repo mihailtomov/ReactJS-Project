@@ -35,6 +35,7 @@ const App = () => {
 
     const loggedOutStateHandler = () => {
         setLoggedIn(false);
+        setUsername('');
     }
 
     const context = {

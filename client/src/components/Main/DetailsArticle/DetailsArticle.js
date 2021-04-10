@@ -8,11 +8,9 @@ import AuthDetailsArticle from './AuthDetailsArticle/AuthDetailsArticle.js';
 
 import AuthContext from '../../../AuthContext';
 
-const DetailsArticle = (
-    {
-        match,
-    }
-) => {
+const DetailsArticle = ({
+    match,
+}) => {
     const { loggedIn, loggedInStateHandler } = useContext(AuthContext);
 
     const [title, setTitle] = useState('');
