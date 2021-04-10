@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:5000/api/auth';
 
-const endpoints = {
+const endpoint = {
     register: `${baseUrl}/register`,
     login: `${baseUrl}/login`,
     validateToken: `${baseUrl}/validate-token`,
@@ -22,7 +22,7 @@ const register = ({ username, password, repeatPassword }) => {
     const passwordsMatch = password === repeatPassword;
 
     if (validateEmpty && passwordsMatch) {
-        return fetch(endpoints.register, postOptions({ username, password }))
+        return fetch(endpoint.register, postOptions({ username, password }))
             .then(res => res.json())
     } else {
         return Promise.reject({ message: 'Invalid input!' });
@@ -33,7 +33,7 @@ const login = ({ username, password }) => {
     const validateEmpty = username.trim() !== '' && password.trim() !== '';
 
     if (validateEmpty) {
-        return fetch(endpoints.login, postOptions({ username, password }))
+        return fetch(endpoint.login, postOptions({ username, password }))
             .then(res => res.json())
     } else {
         return Promise.reject({ message: 'Invalid input!' });
@@ -41,7 +41,7 @@ const login = ({ username, password }) => {
 }
 
 const validateToken = (token) => {
-    return fetch(endpoints.validateToken, {
+    return fetch(endpoint.validateToken, {
         method: 'GET', 
         headers: {
             'Authorization': `Bearer ${token}`

@@ -15,29 +15,29 @@ const ArticleForm = ({
     return (
         <form onSubmit={onSubmitHandler}>
             <label htmlFor="title">Title:</label>
-            <input type="text" name="title" id="title" placeholder="Title.." value={title} />
+            <input type="text" name="title" id="title" placeholder="Title.." defaultValue={title} />
 
             <label htmlFor="content">Content:</label>
-            <textarea name="content" id="content" placeholder="Description.." value={content}></textarea>
+            <textarea name="content" id="content" placeholder="Description.." defaultValue={content}></textarea>
 
             <div>
                 <label htmlFor="category">Category:</label>
                 <select name="category" id="category" defaultValue="all">
                     {availableOptions.map(o => {
                         if (o.value === category) {
-                            return <option value={o.value} selected>{o.label}</option>
+                            return <option key={o.value} value={o.value} selected>{o.label}</option>
                         } else {
-                            return <option value={o.value}>{o.label}</option>
+                            return <option key={o.value} value={o.value}>{o.label}</option>
                         }
                     })}
                 </select>
             </div>
 
             <label htmlFor="imageUrl">Image URL:</label>
-            <input type="text" name="imageUrl" id="imageUrl" placeholder="http://" value={imageUrl} />
+            <input type="text" name="imageUrl" id="imageUrl" placeholder="http://" defaultValue={imageUrl} />
 
             <label htmlFor="youtubeUrl">Youtube URL (optional):</label>
-            <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://" value={youtubeUrl} />
+            <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://" defaultValue={youtubeUrl} />
 
             <input type="submit" value="Submit" />
         </form>

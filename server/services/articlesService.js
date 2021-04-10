@@ -3,12 +3,11 @@ const Comment = require('../models/Comment');
 const User = require('../models/User');
 
 const getFormattedDate = require('../helpers/getFormattedDate');
+const embedYoutubeUrl = require('../helpers/embedYoutubeUrl');
 
 const create = (articleData) => {
     articleData.date = getFormattedDate();
-    articleData.youtubeUrl ?
-        articleData.youtubeUrl = `https://www.youtube.com/embed/${articleData.youtubeUrl.split('=')[1]}` :
-        articleData.youtubeUrl = ''
+    articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
 
     const article = new Article(articleData);
 
@@ -51,9 +50,16 @@ const addComment = ({ articleId, name, comment }) => {
         });
 }
 
+const update = (articleId, updatedArticleData) => {
+    updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
+    
+    return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
+}
+
 module.exports = {
     create,
     getAll,
     getOne,
     addComment,
+    update,
 }

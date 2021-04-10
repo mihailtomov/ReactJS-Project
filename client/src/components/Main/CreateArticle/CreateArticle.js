@@ -1,21 +1,12 @@
 import './CreateArticle.css';
 
 import { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
 import articleService from '../../../services/articleService';
 import AuthContext from '../../../AuthContext';
 
 class CreateArticle extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            articleCreated: false,
-            selectedFile: null,
-        }
-    }
     componentDidMount() {
         if (localStorage['auth']) this.context.loggedInStateHandler();
     }
@@ -42,24 +33,20 @@ class CreateArticle extends Component {
             .then(res => {
                 if (res.err) throw res.err;
 
-                this.setState({ articleCreated: true });
+                this.props.history.push('/categories/all');
             })
             .catch(err => console.log(err))
     }
 
     render() {
-        if (this.state.articleCreated) {
-            return <Redirect to="/categories/all" />
-        } else {
-            return (
-                <section className="create-article">
-                    <h2>Create new article</h2>
-                    <div>
-                        <ArticleForm onSubmitHandler={this.onSubmitHandler} />
-                    </div>
-                </section>
-            );
-        }
+        return (
+            <section className="create-article">
+                <h2>Create new article</h2>
+                <div>
+                    <ArticleForm onSubmitHandler={this.onSubmitHandler} />
+                </div>
+            </section>
+        );
     }
 }
 
