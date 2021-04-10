@@ -11,6 +11,7 @@ import Logout from './Logout/Logout.js';
 import CreateArticle from './CreateArticle/CreateArticle.js';
 import DetailsArticle from './DetailsArticle/DetailsArticle.js';
 import EditArticle from './EditArticle/EditArticle.js';
+import DeleteArticle from './DeleteArticle/DeleteArticle.js';
 
 class Main extends Component {
     render() {
@@ -25,6 +26,7 @@ class Main extends Component {
                     <Route path="/article/create" component={CreateArticle} />
                     <Route path="/article/details/:articleId" component={DetailsArticle} />
                     <Route path="/article/edit/:articleId" component={EditArticle} />
+                    <Route path="/article/delete/:articleId" component={DeleteArticle} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={Logout} />

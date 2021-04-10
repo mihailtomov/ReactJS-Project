@@ -1,14 +1,17 @@
 import './EditArticle.css';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
 import articleService from '../../../services/articleService.js';
+import AuthContext from '../../../AuthContext.js';
 
 const EditArticle = ({
-    match, history
+    match
 }) => {
+    const { loggedInStateHandler } = useContext(AuthContext);
+
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('');
@@ -17,6 +20,8 @@ const EditArticle = ({
     const [isArticleUpdated, setIsArticleUpdated] = useState(false);
 
     useEffect(() => {
+        loggedInStateHandler();
+        
         const { articleId } = match.params;
 
         articleService.getOne(articleId)
@@ -38,7 +43,7 @@ const EditArticle = ({
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        
+
         const { articleId } = match.params;
 
         const title = e.target.title.value;

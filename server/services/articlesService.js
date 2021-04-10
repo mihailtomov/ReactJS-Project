@@ -52,8 +52,12 @@ const addComment = ({ articleId, name, comment }) => {
 
 const update = (articleId, updatedArticleData) => {
     updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
-    
+
     return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
+}
+
+const remove = (articleId) => {
+    return Article.findOneAndDelete({ _id: articleId });
 }
 
 module.exports = {
@@ -62,4 +66,5 @@ module.exports = {
     getOne,
     addComment,
     update,
+    remove,
 }

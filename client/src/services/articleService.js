@@ -15,7 +15,7 @@ const fetchOptions = (method, data) => {
 
 const create = (articleData) => {
     return fetch(baseUrl, fetchOptions('POST', articleData))
-    .then(res => res.json())
+        .then(res => res.json())
 }
 
 const getAll = (category) => {
@@ -38,12 +38,18 @@ const update = (articleId, updatedArticleData) => {
         .then(res => res.json());
 }
 
+const remove = (articleId) => {
+    return fetch(`${baseUrl}/${articleId}/delete`, fetchOptions('DELETE', {}))
+        .then(res => res.json());
+}
+
 const articleService = {
     create,
     getAll,
     getOne,
     postComment,
     update,
+    remove,
 }
 
 export default articleService;

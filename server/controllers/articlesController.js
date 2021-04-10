@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const articlesService = require('../services/articlesService');
 const { isAuth } = require('../middlewares/authorization');
-const { update } = require('../models/Article');
 
 router.post('/', isAuth, (req, res, next) => {
     articlesService.create(req.body)
@@ -44,7 +43,17 @@ router.patch('/:articleId/edit', isAuth, (req, res, next) => {
 
     articlesService.update(articleId, req.body)
         .then(updatedArticle => {
-            res.status(201).json({ _id: updatedArticle._id });
+            res.status(200).json({ _id: updatedArticle._id });
+        })
+        .catch(next);
+});
+
+router.delete('/:articleId/delete', isAuth, (req, res, next) => {
+    const { articleId } = req.params;
+
+    articlesService.remove(articleId)
+        .then(deletedArticle => {
+            res.status(200).json({ _id: deletedArticle._id });
         })
         .catch(next);
 });
