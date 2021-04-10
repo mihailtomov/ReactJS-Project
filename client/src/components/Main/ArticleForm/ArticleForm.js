@@ -1,3 +1,9 @@
+const availableOptions = [
+    { value: 'all', label: 'All' },
+    { value: 'music', label: 'Music' },
+    { value: 'gaming', label: 'Gaming' },
+]
+
 const ArticleForm = ({
     onSubmitHandler,
     title,
@@ -16,10 +22,14 @@ const ArticleForm = ({
 
             <div>
                 <label htmlFor="category">Category:</label>
-                <select name="category" id="category" defaultValue="all" value={category} >
-                    <option value="all">All</option>
-                    <option value="music">Music</option>
-                    <option value="gaming">Gaming</option>
+                <select name="category" id="category" defaultValue="all">
+                    {availableOptions.map(o => {
+                        if (o.value === category) {
+                            return <option value={o.value} selected>{o.label}</option>
+                        } else {
+                            return <option value={o.value}>{o.label}</option>
+                        }
+                    })}
                 </select>
             </div>
 

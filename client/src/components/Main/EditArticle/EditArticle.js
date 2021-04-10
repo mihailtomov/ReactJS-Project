@@ -38,7 +38,13 @@ const EditArticle = ({
         <section className="edit-article">
             <h2>Edit your article</h2>
             <div>
-                <ArticleForm title={title} content={content} imageUrl={imageUrl} youtubeUrl={youtubeUrl} category={category} />
+                <ArticleForm
+                    title={title}
+                    content={content}
+                    imageUrl={imageUrl}
+                    youtubeUrl={youtubeUrl}
+                    category={category}
+                />
             </div>
         </section>
     );
