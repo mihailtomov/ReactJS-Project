@@ -4,24 +4,34 @@ const User = require('../models/User');
 
 const getFormattedDate = require('../helpers/getFormattedDate');
 const embedYoutubeUrl = require('../helpers/embedYoutubeUrl');
-const { isEmpty } = require('../helpers/validators');
+const { isEmpty, isValidProtocol } = require('../helpers/validators');
 
 const create = (articleData) => {
     const { title, content, category, imageUrl, author } = articleData;
-    articleData.date = getFormattedDate();
-    articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
 
-    const article = new Article(articleData);
+    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && !isEmpty(author) && isValidProtocol(imageUrl)) {
+        articleData.date = getFormattedDate();
 
-    return User.findOne({ username: articleData.author })
-        .then(user => {
-            user.createdArticles.push(article);
+        if (articleData.youtubeUrl && isValidProtocol(articleData.youtubeUrl)) {
+            articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
+        } else {
+            throw { message: 'Invalid Youtube URL!' };
+        }
 
-            return user.save();
-        })
-        .then(() => {
-            return article.save();
-        });
+        const article = new Article(articleData);
+
+        return User.findOne({ username: articleData.author })
+            .then(user => {
+                user.createdArticles.push(article);
+
+                return user.save();
+            })
+            .then(() => {
+                return article.save();
+            });
+    } else {
+        throw { message: 'There is an empty field or the image URL is invalid!' };
+    }
 }
 
 const getAll = (category) => {
@@ -61,9 +71,23 @@ const addComment = ({ articleId, name, comment }) => {
 }
 
 const update = (articleId, updatedArticleData) => {
-    updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
+    const { title, content, category, imageUrl } = updatedArticleData;
 
-    return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
+    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && isValidProtocol(imageUrl)) {
+
+        if (updatedArticleData.youtubeUrl) {
+
+            if (isValidProtocol(updatedArticleData.youtubeUrl)) {
+                updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
+            } else {
+                throw { message: 'Invalid Youtube URL!' };
+            }
+        }
+        
+        return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
+    } else {
+        throw { message: 'There is an empty field or the image URL is invalid!' };
+    }
 }
 
 const remove = (articleId) => {
