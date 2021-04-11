@@ -1,17 +1,35 @@
 import './Profile.css';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthContext from '../../../AuthContext.js';
+import userService from '../../../services/userService.js';
 
 const Profile = () => {
     const { loggedInStateHandler } = useContext(AuthContext);
 
+    const [userComments, setUserComments] = useState(0);
+    const [userArticles, setUserArticles] = useState([]);
+
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
 
-        
+        const username = localStorage['user'];
+
+        userService.getUserInfo(username)
+            .then(res => {
+                if (res.err) throw res.err;
+
+                const { comments, createdArticles } = res;
+
+                setUserComments(comments.length);
+                setUserArticles(createdArticles);
+
+                console.log(userComments);
+                console.log(userArticles);
+            })
+            .catch(err => console.log(err));
     }, []);
 
     return (
@@ -19,13 +37,12 @@ const Profile = () => {
             <i className="material-icons">account_circle</i>
             <h4>My articles</h4>
             <ul>
-                <li><Link>Article 1</Link></li>
-                <li><Link>Article 2</Link></li>
-                <li><Link>Article 3</Link></li>
-                <li><Link>Article 4</Link></li>
+                {
+                    userArticles.map(a => <li key={a._id}><Link to={`/article/details/${a._id}`}>{a.title}</Link></li>)
+                }
             </ul>
             <h4>Comments count</h4>
-            <span>152</span>
+            <span>{userComments}</span>
         </section>
     );
 }

@@ -2,7 +2,15 @@ import GuestDetailsArticle from '../GuestDetailsArticle/GuestDetailsArticle.js';
 import Comment from '../Comment/Comment.js';
 
 const AuthDetailsArticle = ({
-    _id, title, content, imageUrl, youtubeUrl, author, date, comments, onCommentSubmitHandler
+    _id,
+    title,
+    content,
+    imageUrl,
+    youtubeUrl,
+    author,
+    date,
+    comments,
+    onCommentSubmitHandler
 }) => {
     return (
         <>
