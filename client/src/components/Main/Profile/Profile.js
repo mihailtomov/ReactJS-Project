@@ -25,9 +25,6 @@ const Profile = () => {
 
                 setUserComments(comments.length);
                 setUserArticles(createdArticles);
-
-                console.log(userComments);
-                console.log(userArticles);
             })
             .catch(err => console.log(err));
     }, []);

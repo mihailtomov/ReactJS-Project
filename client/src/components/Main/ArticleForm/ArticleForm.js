@@ -1,3 +1,5 @@
+import './ArticleForm.css';
+
 const availableOptions = [
     { value: 'all', label: 'All' },
     { value: 'music', label: 'Music' },
@@ -13,7 +15,7 @@ const ArticleForm = ({
     youtubeUrl,
 }) => {
     return (
-        <form onSubmit={onSubmitHandler}>
+        <form className="article-form" onSubmit={onSubmitHandler}>
             <label htmlFor="title">Title:</label>
             <input type="text" name="title" id="title" placeholder="Title.." defaultValue={title} />
 

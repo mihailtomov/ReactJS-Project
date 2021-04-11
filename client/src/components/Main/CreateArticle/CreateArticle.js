@@ -1,5 +1,3 @@
-import './CreateArticle.css';
-
 import { Component } from 'react';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';

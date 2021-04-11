@@ -1,9 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 
 import HomeArticleList from './HomeArticleList/HomeArticleList.js';
-
 import articleService from '../../../services/articleService';
-
 import AuthContext from '../../../AuthContext';
 
 const Home = ({

@@ -9,7 +9,7 @@ const HomeArticle = ({
 }) => {
     return (
         <article className="home-article">
-            <h3>{title}</h3>
+            <h3><Link to={`/article/details/${_id}`}>{title}</Link></h3>
             <p className="description">
                 {content.slice(0, 150)}&hellip;
                 <Link className="read-more" to={`/article/details/${_id}`}>read more</Link>

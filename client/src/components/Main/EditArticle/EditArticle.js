@@ -1,5 +1,3 @@
-import './EditArticle.css';
-
 import { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
