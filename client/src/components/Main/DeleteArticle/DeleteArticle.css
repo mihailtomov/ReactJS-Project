@@ -1,8 +1,8 @@
-section.article-delete h3 {
+.article-delete h3 {
     margin: 30px 0;
 }
 
-section.article-delete a {
+.article-delete a {
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
@@ -13,7 +13,7 @@ section.article-delete a {
     margin-right: 15px;
 }
 
-section.article-delete a:hover {
+.article-delete a:hover {
     color: rgb(87, 197, 224);
     cursor: pointer;
 }

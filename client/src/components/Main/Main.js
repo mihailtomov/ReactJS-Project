@@ -12,6 +12,7 @@ import CreateArticle from './CreateArticle/CreateArticle.js';
 import DetailsArticle from './DetailsArticle/DetailsArticle.js';
 import EditArticle from './EditArticle/EditArticle.js';
 import DeleteArticle from './DeleteArticle/DeleteArticle.js';
+import Profile from './Profile/Profile.js';
 
 class Main extends Component {
     render() {
@@ -27,6 +28,7 @@ class Main extends Component {
                     <Route path="/article/details/:articleId" component={DetailsArticle} />
                     <Route path="/article/edit/:articleId" component={EditArticle} />
                     <Route path="/article/delete/:articleId" component={DeleteArticle} />
+                    <Route path="/profile" component={Profile} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/logout" component={Logout} />

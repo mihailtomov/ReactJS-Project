@@ -20,7 +20,7 @@ const AuthDetailsArticle = ({
             <div>
                 {
                     comments.map(c =>
-                        <Comment key={c._id} name={c.name} comment={c.comment} date={c.date} number={c.number} />
+                        <Comment key={c._id} _id={c._id} name={c.name} comment={c.comment} date={c.date} number={c.number} />
                     )
                 }
             </div>

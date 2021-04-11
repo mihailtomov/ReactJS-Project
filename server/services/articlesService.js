@@ -9,9 +9,18 @@ const create = (articleData) => {
     articleData.date = getFormattedDate();
     articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
 
+
     const article = new Article(articleData);
 
-    return article.save();
+    return User.findOne({ username: articleData.author })
+        .then(user => {
+            user.createdArticles.push(article);
+
+            return user.save();
+        })
+        .then(() => {
+            return article.save();
+        });
 }
 
 const getAll = (category) => {

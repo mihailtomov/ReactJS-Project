@@ -12,7 +12,7 @@ class Header extends Component {
                     <nav>
                         <ul>
                             <li><Link to="/article/create" >Create Article</Link></li>
-                            <li><span>Welcome, {this.props.username}!</span></li>
+                            <li><span>Welcome, <Link to="/profile">{this.props.username}</Link>!</span></li>
                             <li><Link to="/logout">Logout</Link></li>
                         </ul>
                     </nav>

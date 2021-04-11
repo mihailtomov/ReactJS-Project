@@ -8,7 +8,6 @@ import Main from './components/Main/Main.js';
 import Footer from './components/Footer/Footer.js';
 
 import authService from './services/authService';
-
 import AuthContext from './AuthContext';
 
 const App = () => {
@@ -26,8 +25,7 @@ const App = () => {
                         setUsername(localStorage['user']);
                     } else {
                         localStorage.clear();
-                        setLoggedIn(false);
-                        setUsername('');
+                        loggedOutStateHandler();
                     }
                 })
         }

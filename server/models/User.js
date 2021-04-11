@@ -7,6 +7,10 @@ const userSchema = mongoose.Schema({
     password: {
         type: String
     },
+    createdArticles: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Article'
+    }],
     comments: [{
         type: mongoose.Types.ObjectId,
         ref: 'Comment'
