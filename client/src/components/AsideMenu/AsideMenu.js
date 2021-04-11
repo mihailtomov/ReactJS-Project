@@ -12,6 +12,7 @@ const AsideMenu = () => {
                 <Link to="/categories/all">Home</Link>
                 <Link to="/categories/music">Music</Link>
                 <Link to="/categories/gaming">Gaming</Link>
+                <Link to="/categories/other">Other</Link>
             </nav>
         </aside>
     )

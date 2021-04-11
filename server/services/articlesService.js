@@ -4,11 +4,12 @@ const User = require('../models/User');
 
 const getFormattedDate = require('../helpers/getFormattedDate');
 const embedYoutubeUrl = require('../helpers/embedYoutubeUrl');
+const { isEmpty } = require('../helpers/validators');
 
 const create = (articleData) => {
+    const { title, content, category, imageUrl, author } = articleData;
     articleData.date = getFormattedDate();
     articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
-
 
     const article = new Article(articleData);
 
