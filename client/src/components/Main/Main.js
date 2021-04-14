@@ -14,6 +14,8 @@ import EditArticle from './EditArticle/EditArticle.js';
 import DeleteArticle from './DeleteArticle/DeleteArticle.js';
 import Profile from './Profile/Profile.js';
 
+import isAuth from '../../hoc/isAuth';
+
 class Main extends Component {
     render() {
         return (
@@ -24,14 +26,14 @@ class Main extends Component {
                     </Route>
 
                     <Route path="/categories/:category" component={Home} />
-                    <Route path="/article/create" component={CreateArticle} />
+                    <Route path="/article/create" component={isAuth(CreateArticle)} />
                     <Route path="/article/details/:articleId" component={DetailsArticle} />
-                    <Route path="/article/edit/:articleId" component={EditArticle} />
-                    <Route path="/article/delete/:articleId" component={DeleteArticle} />
-                    <Route path="/profile" component={Profile} />
+                    <Route path="/article/edit/:articleId" component={isAuth(EditArticle)} />
+                    <Route path="/article/delete/:articleId" component={isAuth(DeleteArticle)} />
+                    <Route path="/profile" component={isAuth(Profile)} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
-                    <Route path="/logout" component={Logout} />
+                    <Route path="/logout" component={isAuth(Logout)} />
 
                     <Route component={NotFound} />
                 </Switch>
