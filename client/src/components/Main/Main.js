@@ -15,6 +15,7 @@ import DeleteArticle from './DeleteArticle/DeleteArticle.js';
 import Profile from './Profile/Profile.js';
 
 import isAuth from '../../hoc/isAuth';
+import isGuest from '../../hoc/isGuest';
 
 class Main extends Component {
     render() {
@@ -31,8 +32,8 @@ class Main extends Component {
                     <Route path="/article/edit/:articleId" component={isAuth(EditArticle)} />
                     <Route path="/article/delete/:articleId" component={isAuth(DeleteArticle)} />
                     <Route path="/profile" component={isAuth(Profile)} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={isGuest(Register)} />
+                    <Route path="/login" component={isGuest(Login)} />
                     <Route path="/logout" component={isAuth(Logout)} />
 
                     <Route component={NotFound} />

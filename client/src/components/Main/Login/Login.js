@@ -1,62 +1,70 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
 import authService from '../../../services/authService';
+import errorHandler from '../../../utils/errorHandler';
+import { MyTextInput } from '../../../reusable-components/reusable-components.js';
 
-class Login extends Component {
-    constructor() {
-        super();
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 
-        this.state = {
-            username: '',
-            password: '',
-            loggedIn: false,
-        }
+const Login = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [onSubmitError, setOnSubmitError] = useState({ message: '' });
+
+    if (loggedIn) {
+        return <Redirect to="/" />
     }
 
-    onChangeHandler = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+    return (
+        <Formik
+            initialValues={{ username: '', password: '' }}
+            validationSchema={Yup.object({
+                username: Yup.string()
+                    .required('Username is required!'),
+                password: Yup.string()
+                    .required('Password is required!'),
+            })}
+            onSubmit={values => {
+                authService.login(values)
+                    .then(res => {
+                        if (res.err) throw res.err;
 
-    onSubmitHandler = (e) => {
-        e.preventDefault();
+                        localStorage.setItem('user', res.username);
+                        localStorage.setItem('auth', res.token);
 
-        authService.login(this.state)
-            .then(res => {
-                if (res.err) throw res.err;
-
-                localStorage.setItem('user', res.username);
-                localStorage.setItem('auth', res.token);
-
-                setTimeout(() => {
-                    this.setState({ loggedIn: true });
-                }, 20)
-            })
-            .catch(err => console.log(err))
-    }
-
-    render() {
-        const { username, password, loggedIn } = this.state;
-
-        if (loggedIn) {
-            return <Redirect to="/" />
-        }
-
-        return (
+                        setTimeout(() => {
+                            setLoggedIn(true);
+                        }, 20)
+                    })
+                    .catch(err => errorHandler(setOnSubmitError, err));
+            }}
+        >
             <section>
+                {onSubmitError.message.length > 0 ? <ErrorMessage message={onSubmitError.message} /> : null}
+
                 <h2>Login</h2>
                 <div>
-                    <form onSubmit={this.onSubmitHandler}>
-                        <label>Username:</label>
-                        <input type="text" name="username" value={username} onChange={this.onChangeHandler} />
-                        <label>Password:</label>
-                        <input type="password" name="password" value={password} onChange={this.onChangeHandler} />
+                    <Form>
+                        <MyTextInput
+                            label="Username:"
+                            name="username"
+                            type="text"
+                        />
+
+                        <MyTextInput
+                            label="Password:"
+                            name="password"
+                            type="password"
+                        />
+
                         <input type="submit" value="Login" />
-                    </form>
+                    </Form>
                 </div>
             </section>
-        );
-    }
+        </Formik>
+    )
 }
 
 export default Login;

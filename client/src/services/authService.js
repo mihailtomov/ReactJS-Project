@@ -16,38 +16,24 @@ const postOptions = (data) => {
     }
 }
 
-const register = ({ username, password, repeatPassword }) => {
-    const validateEmpty = username.trim() !== '' && password.trim() !== '' && repeatPassword.trim() !== '';
-
-    const passwordsMatch = password === repeatPassword;
-
-    if (validateEmpty && passwordsMatch) {
-        return fetch(endpoint.register, postOptions({ username, password }))
-            .then(res => res.json())
-    } else {
-        return Promise.reject({ message: 'Invalid input!' });
-    }
+const register = ({ username, password }) => {
+    return fetch(endpoint.register, postOptions({ username, password }))
+        .then(res => res.json());
 }
 
 const login = ({ username, password }) => {
-    const validateEmpty = username.trim() !== '' && password.trim() !== '';
-
-    if (validateEmpty) {
-        return fetch(endpoint.login, postOptions({ username, password }))
-            .then(res => res.json())
-    } else {
-        return Promise.reject({ message: 'Invalid input!' });
-    }
+    return fetch(endpoint.login, postOptions({ username, password }))
+        .then(res => res.json());
 }
 
 const validateToken = (token) => {
     return fetch(endpoint.validateToken, {
-        method: 'GET', 
+        method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
         }
     })
-    .then(res => res.json());
+        .then(res => res.json());
 }
 
 const authService = {

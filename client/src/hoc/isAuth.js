@@ -4,7 +4,7 @@ import AuthContext from '../AuthContext';
 
 const isAuth = (WrappedComponent) => {
     
-    const Component = () => {
+    const Component = (props) => {
         const { loggedIn } = useContext(AuthContext);
         const history = useHistory();
 
@@ -13,7 +13,7 @@ const isAuth = (WrappedComponent) => {
             return null;
         }
 
-        return <WrappedComponent />
+        return <WrappedComponent {...props} />
     }
 
     return Component;
