@@ -13,8 +13,8 @@ const GuestDetailsArticle = ({
                 </div>
             }
             <div className="visual-section">
-                <img src={imageUrl} alt="" />
-                <iframe width="500" height="281" src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                {imageUrl && <img src={imageUrl} alt="" />}
+                {youtubeUrl && <iframe width="500" height="281" src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
             </div>
             {content.split('\n\n').map((paragraph, i) => <p key={i} className="description">{paragraph}</p>)}
             <div className="article-info">

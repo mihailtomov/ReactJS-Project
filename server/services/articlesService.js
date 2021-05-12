@@ -9,13 +9,17 @@ const { isEmpty, isValidProtocol } = require('../helpers/validators');
 const create = (articleData) => {
     const { title, content, category, imageUrl, author } = articleData;
 
-    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && !isEmpty(author) && isValidProtocol(imageUrl)) {
+    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && !isEmpty(author)) {
         articleData.date = getFormattedDate();
 
         if (articleData.youtubeUrl && isValidProtocol(articleData.youtubeUrl)) {
             articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
-        } else {
+        } else if (articleData.youtubeUrl && !isValidProtocol(articleData.youtubeUrl)) {
             throw { message: 'Invalid Youtube URL!' };
+        }
+
+        if (imageUrl && !isValidProtocol(imageUrl)) {
+            throw { message: 'Invalid image URL!' };
         }
 
         const article = new Article(articleData);
@@ -83,7 +87,7 @@ const update = (articleId, updatedArticleData) => {
                 throw { message: 'Invalid Youtube URL!' };
             }
         }
-        
+
         return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
     } else {
         throw { message: 'There is an empty field or the image URL is invalid!' };
