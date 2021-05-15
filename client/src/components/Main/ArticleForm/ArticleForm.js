@@ -1,49 +1,47 @@
 import './ArticleForm.css';
 
-const availableOptions = [
-    { value: 'all', label: 'All' },
-    { value: 'music', label: 'Music' },
-    { value: 'gaming', label: 'Gaming' },
-    { value: 'other', label: 'Other' },
-]
+import { Form } from 'formik';
+import { MyTextInput, MyTextareaInput, MySelect } from '../../../reusable-components/reusable-components.js';
+import availableOptions from '../../../utils/categoryOptions.js';
 
-const ArticleForm = ({
-    onSubmitHandler,
-    title,
-    content,
-    category,
-    imageUrl,
-    youtubeUrl,
-}) => {
+const ArticleForm = () => {
     return (
-        <form className="article-form" onSubmit={onSubmitHandler}>
-            <label htmlFor="title">Title:</label>
-            <input type="text" name="title" id="title" placeholder="Title.." defaultValue={title} />
+        <Form className="article-form">
+            <MyTextInput
+                label="Title:"
+                name="title"
+                type="text"
+                placeholder="Title.."
+            />
 
-            <label htmlFor="content">Content:</label>
-            <textarea name="content" id="content" placeholder="Description.." defaultValue={content}></textarea>
+            <MyTextareaInput
+                label="Content:"
+                name="content"
+                placeholder="Description.."
+            />
 
-            <div>
-                <label htmlFor="category">Category:</label>
-                <select name="category" id="category" defaultValue="all">
-                    {availableOptions.map(o => {
-                        if (o.value === category) {
-                            return <option key={o.value} value={o.value} selected>{o.label}</option>
-                        } else {
-                            return <option key={o.value} value={o.value}>{o.label}</option>
-                        }
-                    })}
-                </select>
-            </div>
+            <MySelect label="Category:" name="category">
+                {availableOptions.map(o => {
+                    return <option key={o.value} value={o.value}>{o.label}</option>
+                })}
+            </MySelect>
 
-            <label htmlFor="imageUrl">Image URL:</label>
-            <input type="text" name="imageUrl" id="imageUrl" placeholder="http://" defaultValue={imageUrl} />
+            <MyTextInput
+                label="Image URL (optional):"
+                name="imageUrl"
+                type="text"
+                placeholder="http://"
+            />
 
-            <label htmlFor="youtubeUrl">Youtube URL (optional):</label>
-            <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://" defaultValue={youtubeUrl} />
+            <MyTextInput
+                label="Youtube URL (optional):"
+                name="youtubeUrl"
+                type="text"
+                placeholder="https://"
+            />
 
             <input type="submit" value="Submit" />
-        </form>
+        </Form>
     );
 }
 

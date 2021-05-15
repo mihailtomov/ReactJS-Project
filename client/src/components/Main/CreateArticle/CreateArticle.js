@@ -1,23 +1,19 @@
 import './CreateArticle.css';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { MyTextInput, MyTextareaInput, MySelect } from '../../../reusable-components/reusable-components.js';
+import ArticleForm from '../ArticleForm/ArticleForm.js';
 import articleService from '../../../services/articleService';
+import errorHandler from '../../../utils/errorHandler';
 import AuthContext from '../../../AuthContext';
 
-const availableOptions = [
-    { value: 'all', label: 'All' },
-    { value: 'music', label: 'Music' },
-    { value: 'gaming', label: 'Gaming' },
-    { value: 'other', label: 'Other' },
-]
-
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 
 const CreateArticle = () => {
+    const [onSubmitError, setOnSubmitError] = useState({ message: '' });
     const { loggedInStateHandler } = useContext(AuthContext);
     const history = useHistory();
 
@@ -46,44 +42,14 @@ const CreateArticle = () => {
 
                         history.push('/categories/all');
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => errorHandler(setOnSubmitError, err))
             }}
         >
             <section className="create-article">
+                {onSubmitError.message.length > 0 ? <ErrorMessage message={onSubmitError.message} /> : null}
                 <h2>Create new article</h2>
                 <div>
-                    <Form>
-                        <MyTextInput
-                            label="Title:"
-                            name="title"
-                            type="text"
-                        />
-
-                        <MyTextareaInput
-                            label="Content:"
-                            name="content"
-                        />
-
-                        <MySelect label="Category:" name="category">
-                            {availableOptions.map(o => {
-                                return <option key={o.value} value={o.value}>{o.label}</option>
-                            })}
-                        </MySelect>
-
-                        <MyTextInput
-                            label="Image URL (optional):"
-                            name="imageUrl"
-                            type="text"
-                        />
-
-                        <MyTextInput
-                            label="Youtube URL (optional):"
-                            name="youtubeUrl"
-                            type="text"
-                        />
-
-                        <input type="submit" value="Submit" />
-                    </Form>
+                    <ArticleForm />
                 </div>
             </section>
         </Formik>

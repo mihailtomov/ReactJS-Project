@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
 import articleService from '../../../services/articleService.js';
@@ -16,10 +18,11 @@ const EditArticle = ({
     const [imageUrl, setImageUrl] = useState('');
     const [youtubeUrl, setYoutubeUrl] = useState('');
     const [isArticleUpdated, setIsArticleUpdated] = useState(false);
+    const [isDataAvailable, setIsDataAvailable] = useState(false);
 
     useEffect(() => {
         loggedInStateHandler();
-        
+
         const { articleId } = match.params;
 
         articleService.getOne(articleId)
@@ -35,55 +38,51 @@ const EditArticle = ({
                 setCategory(category);
                 setImageUrl(imageUrl);
                 setYoutubeUrl(youtubeUrl);
+
+                setIsDataAvailable(true);
             })
             .catch(err => console.log(err))
     }, []);
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-
-        const { articleId } = match.params;
-
-        const title = e.target.title.value;
-        const content = e.target.content.value;
-        const category = e.target.category.value;
-        const imageUrl = e.target.imageUrl.value;
-        const youtubeUrl = e.target.youtubeUrl.value;
-
-        articleService.update(articleId, {
-            title,
-            content,
-            category,
-            imageUrl,
-            youtubeUrl
-        })
-            .then(res => {
-                if (res.err) throw res.err;
-
-                setIsArticleUpdated(true);
-            })
-            .catch(err => console.log(err))
-    }
-
     if (isArticleUpdated) {
         return <Redirect to={`/article/details/${match.params.articleId}`} />
-    }
+    } else if (isDataAvailable) {
+        return (
+            <Formik
+                initialValues={{ title, content, category, imageUrl, youtubeUrl }}
+                validationSchema={Yup.object({
+                    title: Yup.string()
+                        .required('Title is required!'),
+                    content: Yup.string()
+                        .required('Content is required!'),
+                    imageUrl: Yup.string()
+                        .url('Invalid URL!'),
+                    youtubeUrl: Yup.string()
+                        .url('Invalid URL!'),
+                })}
+                onSubmit={values => {
+                    const { articleId } = match.params;
 
-    return (
-        <section className="edit-article">
-            <h2>Edit your article</h2>
-            <div>
-                <ArticleForm
-                    onSubmitHandler={onSubmitHandler}
-                    title={title}
-                    content={content}
-                    imageUrl={imageUrl}
-                    youtubeUrl={youtubeUrl}
-                    category={category}
-                />
-            </div>
-        </section>
-    );
+                    articleService.update(articleId, values)
+                        .then(res => {
+                            if (res.err) throw res.err;
+
+                            setIsArticleUpdated(true);
+                        })
+                        .catch(err => console.log(err))
+                }}
+            >
+                <section className="edit-article">
+                    <h2>Edit your article</h2>
+                    <div>
+                        <ArticleForm />
+                    </div>
+                </section>
+            </Formik>
+        );
+    } else {
+        return null;
+    }
 }
 
 export default EditArticle;
