@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
 import authService from '../../../services/authService';
 import errorHandler from '../../../utils/errorHandler';
+import timeoutMessage from '../../../utils/timeoutMessage';
 import { MyTextInput } from '../../../reusable-components/reusable-components.js';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
+import SuccessMessage from '../SuccessMessage/SuccessMessage.js';
 
-const Login = () => {
+const Login = ({
+    location
+}) => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [onSubmitError, setOnSubmitError] = useState({ message: '' });
+    const [onSucessMessage, setOnSuccessMessage] = useState(location.isRegistered);
+
+    useEffect(() => {
+        const timer = timeoutMessage(setOnSuccessMessage, 3000);
+        return () => clearTimeout(timer);
+    }, [])
 
     if (loggedIn) {
         return <Redirect to="/" />
@@ -43,6 +53,7 @@ const Login = () => {
         >
             <section>
                 {onSubmitError.message.length > 0 ? <ErrorMessage message={onSubmitError.message} /> : null}
+                {onSucessMessage ? <SuccessMessage message="Successfully registered!" /> : null}
 
                 <h2>Login</h2>
                 <div>

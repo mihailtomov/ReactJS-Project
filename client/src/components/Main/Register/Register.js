@@ -14,7 +14,12 @@ const Register = () => {
     const [onSubmitError, setOnSubmitError] = useState({ message: '' });
 
     if (registered) {
-        return <Redirect to="/login" />
+        return (
+            <Redirect to={{
+                pathname: '/login',
+                isRegistered: true,
+            }} />
+        )
     }
 
     return (
