@@ -10,7 +10,7 @@ const Home = ({
     const { loggedInStateHandler } = useContext(AuthContext);
 
     const [articles, setArticles] = useState([]);
-    const [category, setCategory] = useState('all');
+    const [category, setCategory] = useState('home');
 
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
@@ -35,7 +35,7 @@ const Home = ({
     })
 
     if (articles.length > 0) {
-        return <HomeArticleList articles={articles} />
+        return <HomeArticleList articles={articles} category={category} />
     }
 
     return <p>There are no articles in this section. Be the first to create one!</p>

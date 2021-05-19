@@ -39,10 +39,10 @@ const create = (articleData) => {
 }
 
 const getAll = (category) => {
-    if (category === 'all') {
-        return Article.find();
+    if (category === 'home') {
+        return Article.find().sort({ date: -1 }).limit(3);
     } else {
-        return Article.find({ category });
+        return Article.find({ category }).sort({ date: -1 });
     }
 }
 

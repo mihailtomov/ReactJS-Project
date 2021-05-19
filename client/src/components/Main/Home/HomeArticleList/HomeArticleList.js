@@ -1,11 +1,12 @@
 import HomeArticle from '../HomeArticle/HomeArticle.js';
 
 const HomeArticleList = ({
-    articles
+    articles,
+    category
 }) => {
     return (
         <section>
-            <h2>Latest Articles</h2>
+            {category === 'home' ? <h2>Latest articles</h2> : <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>}
 
             {
                 articles.map(x => <HomeArticle

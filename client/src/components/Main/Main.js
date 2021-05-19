@@ -23,7 +23,7 @@ class Main extends Component {
             <main className="main-wrapper">
                 <Switch>
                     <Route path="/" exact>
-                        <Redirect to="/categories/all" />
+                        <Redirect to="/categories/home" />
                     </Route>
 
                     <Route path="/categories/:category" component={Home} />
