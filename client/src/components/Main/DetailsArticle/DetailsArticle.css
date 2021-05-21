@@ -16,6 +16,7 @@
 
 .details-article img {
     float: left;
+    margin-right: 90px;
     width: 300px;
     height: 282px;
     object-fit: cover;
@@ -23,11 +24,10 @@
 
 .details-article iframe {
     border: 0;
-    margin: 0 0 20px 90px;
 }
 
 .details-article div.visual-section {
-    height: 300px;
+    /* height: 300px; */
     margin-bottom: 12px;
 }
 

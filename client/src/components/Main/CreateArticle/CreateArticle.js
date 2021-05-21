@@ -40,7 +40,7 @@ const CreateArticle = () => {
                     .then(res => {
                         if (res.err) throw res.err;
 
-                        history.push('/categories/all');
+                        history.push('/categories/home');
                     })
                     .catch(err => errorHandler(setOnSubmitError, err))
             }}

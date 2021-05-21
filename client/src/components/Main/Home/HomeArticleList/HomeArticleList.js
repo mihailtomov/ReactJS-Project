@@ -1,11 +1,15 @@
 import HomeArticle from '../HomeArticle/HomeArticle.js';
+import SuccessMessage from '../../SuccessMessage/SuccessMessage.js';
 
 const HomeArticleList = ({
     articles,
-    category
+    category,
+    onSucessMessage,
 }) => {
     return (
         <section>
+            {onSucessMessage ? <SuccessMessage message="Login successful!" /> : null}
+
             {category === 'home' ? <h2>Latest articles</h2> : <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>}
 
             {

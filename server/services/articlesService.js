@@ -77,7 +77,7 @@ const addComment = ({ articleId, name, comment }) => {
 const update = (articleId, updatedArticleData) => {
     const { title, content, category, imageUrl } = updatedArticleData;
 
-    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && isValidProtocol(imageUrl)) {
+    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category)) {
 
         if (updatedArticleData.youtubeUrl) {
 
@@ -86,6 +86,10 @@ const update = (articleId, updatedArticleData) => {
             } else {
                 throw { message: 'Invalid Youtube URL!' };
             }
+        }
+
+        if (imageUrl && !isValidProtocol(imageUrl)) {
+            throw { message: 'Invalid image URL!' };
         }
 
         return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });

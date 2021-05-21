@@ -24,7 +24,10 @@ const Login = ({
     }, [])
 
     if (loggedIn) {
-        return <Redirect to="/" />
+        return <Redirect to={{
+            pathname: '/categories/home',
+            isLoggedIn: loggedIn,
+        }} />
     }
 
     return (

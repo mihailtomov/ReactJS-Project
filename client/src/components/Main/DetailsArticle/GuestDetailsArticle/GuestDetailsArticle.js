@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 const GuestDetailsArticle = ({
     _id, title, imageUrl, youtubeUrl, content, author, date
 }) => {
+    const height = imageUrl || youtubeUrl ? '300px' : '0px';
+
     return (
         <article>
             <h3>{title}</h3>
@@ -12,7 +14,7 @@ const GuestDetailsArticle = ({
                     <Link className="user-btn" to={`/article/delete/${_id}`}>&#91;Delete&#93;</Link>
                 </div>
             }
-            <div className="visual-section">
+            <div className="visual-section" style={{ height }}>
                 {imageUrl && <img src={imageUrl} alt="" />}
                 {youtubeUrl && <iframe width="500" height="281" src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
             </div>
