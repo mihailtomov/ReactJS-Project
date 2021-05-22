@@ -45,7 +45,13 @@ const EditArticle = ({
     }, []);
 
     if (isArticleUpdated) {
-        return <Redirect to={`/article/details/${match.params.articleId}`} />
+        return <Redirect to={{
+            pathname: `/article/details/${match.params.articleId}`,
+            state: {
+                isArticleUpdated,
+                type: 'article updated'
+            }
+        }} />
     } else if (isDataAvailable) {
         return (
             <Formik

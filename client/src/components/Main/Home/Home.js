@@ -44,7 +44,11 @@ const Home = ({
     })
 
     if (articles.length > 0) {
-        return <HomeArticleList articles={articles} category={category} onSucessMessage={onSucessMessage} />
+        return <HomeArticleList
+            articles={articles}
+            category={category}
+            onSucessMessage={onSucessMessage}
+        />
     }
 
     return <p>There are no articles in this section. Be the first to create one!</p>
