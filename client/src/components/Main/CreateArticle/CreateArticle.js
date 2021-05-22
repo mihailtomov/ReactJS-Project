@@ -40,7 +40,13 @@ const CreateArticle = () => {
                     .then(res => {
                         if (res.err) throw res.err;
 
-                        history.push('/categories/home');
+                        history.push({
+                            pathname: '/categories/home',
+                            state: {
+                                isCreatedArticle: true,
+                                type: 'article created'
+                            }
+                        });
                     })
                     .catch(err => errorHandler(setOnSubmitError, err))
             }}

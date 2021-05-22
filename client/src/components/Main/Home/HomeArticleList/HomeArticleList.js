@@ -8,7 +8,9 @@ const HomeArticleList = ({
 }) => {
     return (
         <section>
-            {onSucessMessage ? <SuccessMessage message="Login successful!" /> : null}
+            {onSucessMessage.type === 'logged in' && <SuccessMessage message="Login successful!" /> }
+            {onSucessMessage.type === 'article created' && <SuccessMessage message="Article created!" /> }
+
 
             {category === 'home' ? <h2>Latest articles</h2> : <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>}
 

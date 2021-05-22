@@ -13,7 +13,10 @@ const Home = ({
 
     const [articles, setArticles] = useState([]);
     const [category, setCategory] = useState('home');
-    const [onSucessMessage, setOnSuccessMessage] = useState(location.isLoggedIn);
+    const [onSucessMessage, setOnSuccessMessage] = useState({
+        state: location.state ? location.state.isLoggedIn || location.state.isCreatedArticle : false,
+        type: location.state ? location.state.type : '',
+    });
 
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();

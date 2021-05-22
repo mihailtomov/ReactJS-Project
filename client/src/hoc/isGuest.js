@@ -6,7 +6,7 @@ const isGuest = (WrappedComponent) => {
         const history = useHistory();
 
         if (localStorage['auth']) {
-            history.push('/categories/all');
+            history.push('/categories/home');
             return null;
         }
 

@@ -29,7 +29,7 @@ const DeleteArticle = ({
     }
 
     if (isArticleDeleted) {
-        return <Redirect to="/categories/all" />
+        return <Redirect to="/categories/home" />
     }
 
     return (

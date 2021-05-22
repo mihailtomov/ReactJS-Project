@@ -1,6 +1,6 @@
 const timeoutMessage = (messageSetter, milliseconds) => {
     return setTimeout(() => {
-        messageSetter(false);
+        messageSetter({ state: false });
     }, milliseconds)
 }
 
