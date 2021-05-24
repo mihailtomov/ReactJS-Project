@@ -61,7 +61,7 @@ const Login = ({
             }}
         >
             <section>
-                {onSubmitError.message.length > 0 ? <ErrorMessage message={onSubmitError.message} /> : null}
+                {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
                 {onSucessMessage.state && <SuccessMessage message="Successfully registered!" />}
 
                 <h2>Login</h2>

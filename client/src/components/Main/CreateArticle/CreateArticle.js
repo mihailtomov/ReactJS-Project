@@ -52,7 +52,8 @@ const CreateArticle = () => {
             }}
         >
             <section className="create-article">
-                {onSubmitError.message.length > 0 ? <ErrorMessage message={onSubmitError.message} /> : null}
+                {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+
                 <h2>Create new article</h2>
                 <div>
                     <ArticleForm />

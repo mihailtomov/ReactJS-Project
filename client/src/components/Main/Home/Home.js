@@ -1,9 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
 
 import HomeArticleList from './HomeArticleList/HomeArticleList.js';
-import articleService from '../../../services/articleService';
-import timeoutMessage from '../../../utils/timeoutMessage';
+
 import AuthContext from '../../../AuthContext';
+import articleService from '../../../services/articleService';
+import errorHandler from '../../../utils/errorHandler';
+import timeoutMessage from '../../../utils/timeoutMessage';
 
 const Home = ({
     match,
@@ -13,6 +15,7 @@ const Home = ({
 
     const [articles, setArticles] = useState([]);
     const [category, setCategory] = useState('home');
+    const [onSubmitError, setOnSubmitError] = useState({ message: '' });
     const [onSucessMessage, setOnSuccessMessage] = useState({
         state: location.message ? location.message.state : false,
         type: location.message ? location.message.type : ''
@@ -32,9 +35,7 @@ const Home = ({
 
                 setArticles(res.articles);
             })
-            .catch(err => {
-                console.log(err);
-            });
+            .catch(err => errorHandler(setOnSubmitError, err));
     }, [category]);
 
     useEffect(() => {
@@ -47,6 +48,7 @@ const Home = ({
         return <HomeArticleList
             articles={articles}
             category={category}
+            onSubmitError={onSubmitError}
             onSucessMessage={onSucessMessage}
         />
     }

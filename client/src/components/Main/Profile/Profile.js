@@ -3,14 +3,19 @@ import './Profile.css';
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
+
 import AuthContext from '../../../AuthContext.js';
 import userService from '../../../services/userService.js';
+import errorHandler from '../../../utils/errorHandler';
+
 
 const Profile = () => {
     const { loggedInStateHandler } = useContext(AuthContext);
 
     const [userComments, setUserComments] = useState(0);
     const [userArticles, setUserArticles] = useState([]);
+    const [onSubmitError, setOnSubmitError] = useState({ message: '' });
 
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
@@ -26,11 +31,13 @@ const Profile = () => {
                 setUserComments(comments.length);
                 setUserArticles(createdArticles);
             })
-            .catch(err => console.log(err));
+            .catch(err => errorHandler(setOnSubmitError, err));
     }, []);
 
     return (
         <section className="user-profile">
+            {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+
             <i className="material-icons">account_circle</i>
             <h4>My articles</h4>
             <ul>

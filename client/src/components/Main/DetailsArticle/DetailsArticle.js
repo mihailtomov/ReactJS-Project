@@ -2,13 +2,16 @@ import './DetailsArticle.css';
 
 import { useContext, useState, useEffect } from 'react';
 
-import articleService from '../../../services/articleService';
-import timeoutMessage from '../../../utils/timeoutMessage';
 import GuestDetailsArticle from './GuestDetailsArticle/GuestDetailsArticle.js';
 import AuthDetailsArticle from './AuthDetailsArticle/AuthDetailsArticle.js';
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 import SuccessMessage from '../SuccessMessage/SuccessMessage.js';
 
 import AuthContext from '../../../AuthContext';
+import articleService from '../../../services/articleService';
+import errorHandler from '../../../utils/errorHandler';
+import timeoutMessage from '../../../utils/timeoutMessage';
+
 
 const DetailsArticle = ({
     match,
@@ -25,6 +28,7 @@ const DetailsArticle = ({
     const [_id, set_id] = useState('');
     const [comments, setComments] = useState([]);
     const [commentPosted, setCommentPosted] = useState('');
+    const [onSubmitError, setOnSubmitError] = useState({ message: '' });
     const [onSucessMessage, setOnSuccessMessage] = useState({
         state: location.message ? location.message.state : false,
         type: location.message ? location.message.type : ''
@@ -55,7 +59,7 @@ const DetailsArticle = ({
                 set_id(_id);
                 setComments(comments);
             })
-            .catch(err => console.log(err))
+            .catch(err => errorHandler(setOnSubmitError, err))
     }, [commentPosted]);
 
 
@@ -72,7 +76,7 @@ const DetailsArticle = ({
                 setCommentPosted(res._id);
                 e.target.comment.value = '';
             })
-            .catch(err => console.log(err));
+            .catch(err => errorHandler(setOnSubmitError, err));
     }
 
     if (!loggedIn) {
@@ -92,6 +96,8 @@ const DetailsArticle = ({
 
     return (
         <section className="details-article">
+            {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+
             {onSucessMessage.state && <SuccessMessage message="Article updated!" />}
 
             <AuthDetailsArticle

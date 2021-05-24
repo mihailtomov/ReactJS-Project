@@ -1,13 +1,17 @@
 import HomeArticle from '../HomeArticle/HomeArticle.js';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage.js';
 import SuccessMessage from '../../SuccessMessage/SuccessMessage.js';
 
 const HomeArticleList = ({
     articles,
     category,
+    onSubmitError,
     onSucessMessage,
 }) => {
     return (
         <section>
+            {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+            
             {onSucessMessage.type === 'logged in' && <SuccessMessage message="Login successful!" /> }
             {onSucessMessage.type === 'article created' && <SuccessMessage message="Article created!" /> }
             {onSucessMessage.type === 'article deleted' && <SuccessMessage message="Article deleted!" /> }

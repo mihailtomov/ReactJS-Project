@@ -4,8 +4,11 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
-import articleService from '../../../services/articleService.js';
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
+
+import articleService from '../../../services/articleService';
 import AuthContext from '../../../AuthContext.js';
+import errorHandler from '../../../utils/errorHandler';
 
 const EditArticle = ({
     match
@@ -19,6 +22,7 @@ const EditArticle = ({
     const [youtubeUrl, setYoutubeUrl] = useState('');
     const [isArticleUpdated, setIsArticleUpdated] = useState(false);
     const [isDataAvailable, setIsDataAvailable] = useState(false);
+    const [onSubmitError, setOnSubmitError] = useState({ message: '' });
 
     useEffect(() => {
         loggedInStateHandler();
@@ -41,7 +45,7 @@ const EditArticle = ({
 
                 setIsDataAvailable(true);
             })
-            .catch(err => console.log(err))
+            .catch(err => errorHandler(setOnSubmitError, err))
     }, []);
 
     if (isArticleUpdated) {
@@ -75,10 +79,12 @@ const EditArticle = ({
 
                             setIsArticleUpdated(true);
                         })
-                        .catch(err => console.log(err))
+                        .catch(err => errorHandler(setOnSubmitError, err))
                 }}
             >
                 <section className="edit-article">
+                    {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+
                     <h2>Edit your article</h2>
                     <div>
                         <ArticleForm />
