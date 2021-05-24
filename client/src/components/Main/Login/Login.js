@@ -16,7 +16,10 @@ const Login = ({
 }) => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [onSubmitError, setOnSubmitError] = useState({ message: '' });
-    const [onSucessMessage, setOnSuccessMessage] = useState(location.isRegistered);
+    const [onSucessMessage, setOnSuccessMessage] = useState({
+        state: location.message ? location.message.state : false,
+        type: location.message ? location.message.type : ''
+    });
 
     useEffect(() => {
         const timer = timeoutMessage(setOnSuccessMessage, 3000);
@@ -26,8 +29,8 @@ const Login = ({
     if (loggedIn) {
         return <Redirect to={{
             pathname: '/categories/home',
-            state: {
-                loggedIn,
+            message: {
+                state: true,
                 type: 'logged in'
             },
         }} />
@@ -59,7 +62,7 @@ const Login = ({
         >
             <section>
                 {onSubmitError.message.length > 0 ? <ErrorMessage message={onSubmitError.message} /> : null}
-                {onSucessMessage ? <SuccessMessage message="Successfully registered!" /> : null}
+                {onSucessMessage.state && <SuccessMessage message="Successfully registered!" />}
 
                 <h2>Login</h2>
                 <div>

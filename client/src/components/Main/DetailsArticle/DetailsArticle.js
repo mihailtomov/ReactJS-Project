@@ -26,7 +26,8 @@ const DetailsArticle = ({
     const [comments, setComments] = useState([]);
     const [commentPosted, setCommentPosted] = useState('');
     const [onSucessMessage, setOnSuccessMessage] = useState({
-        state: location.state ? location.state.isArticleUpdated : false
+        state: location.message ? location.message.state : false,
+        type: location.message ? location.message.type : ''
     });
 
     useEffect(() => {
@@ -91,7 +92,7 @@ const DetailsArticle = ({
 
     return (
         <section className="details-article">
-            {onSucessMessage.state ? <SuccessMessage message="Article updated!" /> : null}
+            {onSucessMessage.state && <SuccessMessage message="Article updated!" />}
 
             <AuthDetailsArticle
                 _id={_id}

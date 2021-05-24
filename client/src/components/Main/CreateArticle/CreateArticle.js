@@ -42,8 +42,8 @@ const CreateArticle = () => {
 
                         history.push({
                             pathname: '/categories/home',
-                            state: {
-                                isCreatedArticle: true,
+                            message: {
+                                state: true,
                                 type: 'article created'
                             }
                         });

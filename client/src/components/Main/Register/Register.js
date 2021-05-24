@@ -17,7 +17,10 @@ const Register = () => {
         return (
             <Redirect to={{
                 pathname: '/login',
-                isRegistered: true,
+                message: {
+                    state: true,
+                    type: 'registered'
+                },
             }} />
         )
     }

@@ -14,8 +14,8 @@ const Home = ({
     const [articles, setArticles] = useState([]);
     const [category, setCategory] = useState('home');
     const [onSucessMessage, setOnSuccessMessage] = useState({
-        state: location.state ? location.state.isLoggedIn || location.state.isCreatedArticle : false,
-        type: location.state ? location.state.type : '',
+        state: location.message ? location.message.state : false,
+        type: location.message ? location.message.type : ''
     });
 
     useEffect(() => {

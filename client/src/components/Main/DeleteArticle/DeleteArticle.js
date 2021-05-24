@@ -31,8 +31,8 @@ const DeleteArticle = ({
     if (isArticleDeleted) {
         return <Redirect to={{
             pathname: '/categories/home',
-            state: {
-                isArticleDeleted,
+            message: {
+                state: true,
                 type: 'article deleted'
             }
         }} />

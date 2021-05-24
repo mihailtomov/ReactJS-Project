@@ -47,8 +47,8 @@ const EditArticle = ({
     if (isArticleUpdated) {
         return <Redirect to={{
             pathname: `/article/details/${match.params.articleId}`,
-            state: {
-                isArticleUpdated,
+            message: {
+                state: true,
                 type: 'article updated'
             }
         }} />
