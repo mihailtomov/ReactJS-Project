@@ -13,6 +13,7 @@ import DetailsArticle from './DetailsArticle/DetailsArticle.js';
 import EditArticle from './EditArticle/EditArticle.js';
 import DeleteArticle from './DeleteArticle/DeleteArticle.js';
 import Profile from './Profile/Profile.js';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary.js'
 
 import isAuth from '../../hoc/isAuth';
 import isGuest from '../../hoc/isGuest';
@@ -21,23 +22,25 @@ class Main extends Component {
     render() {
         return (
             <main className="main-wrapper">
-                <Switch>
-                    <Route path="/" exact>
-                        <Redirect to="/categories/home" />
-                    </Route>
+                <ErrorBoundary>
+                    <Switch>
+                        <Route path="/" exact>
+                            <Redirect to="/categories/home" />
+                        </Route>
 
-                    <Route path="/categories/:category" component={Home} />
-                    <Route path="/article/create" component={isAuth(CreateArticle)} />
-                    <Route path="/article/details/:articleId" component={DetailsArticle} />
-                    <Route path="/article/edit/:articleId" component={isAuth(EditArticle)} />
-                    <Route path="/article/delete/:articleId" component={isAuth(DeleteArticle)} />
-                    <Route path="/profile" component={isAuth(Profile)} />
-                    <Route path="/register" component={isGuest(Register)} />
-                    <Route path="/login" component={isGuest(Login)} />
-                    <Route path="/logout" component={isAuth(Logout)} />
+                        <Route path="/categories/:category" component={Home} />
+                        <Route path="/article/create" component={isAuth(CreateArticle)} />
+                        <Route path="/article/details/:articleId" component={DetailsArticle} />
+                        <Route path="/article/edit/:articleId" component={isAuth(EditArticle)} />
+                        <Route path="/article/delete/:articleId" component={isAuth(DeleteArticle)} />
+                        <Route path="/profile" component={isAuth(Profile)} />
+                        <Route path="/register" component={isGuest(Register)} />
+                        <Route path="/login" component={isGuest(Login)} />
+                        <Route path="/logout" component={isAuth(Logout)} />
 
-                    <Route component={NotFound} />
-                </Switch>
+                        <Route component={NotFound} />
+                    </Switch>
+                </ErrorBoundary>
             </main>
         )
     }

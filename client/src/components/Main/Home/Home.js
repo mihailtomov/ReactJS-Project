@@ -24,6 +24,10 @@ const Home = ({
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
 
+        if (Math.random() > 0.7) {
+            throw new Error('Error throw from Home Component');
+        }
+
         const timer = timeoutMessage(setOnSuccessMessage, 3000);
         return () => clearTimeout(timer);
     }, [])
