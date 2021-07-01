@@ -94,3 +94,30 @@
 .details-article div.article-info {
     margin-top: 40px;
 }
+
+.details-article span.cannot-like-article {
+    float: right;
+    color: #32a999;
+    font-weight: bold;
+}
+
+.details-article span.cannot-like-article span {
+    color: #dc687e;
+}
+
+.details-article span.can-like-article {
+    float: right;
+    color: #2daac9;
+    font-weight: bold;
+}
+
+.details-article span.can-like-article span {
+    font-size: 19px;
+    color: #dc687e;
+    margin: 0 5px;
+}
+
+.details-article span.can-like-article span:hover {
+    color: #4de07e;
+    cursor: pointer;
+}

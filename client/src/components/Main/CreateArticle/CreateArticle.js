@@ -14,7 +14,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 
 const CreateArticle = () => {
     const [onSubmitError, setOnSubmitError] = useState({ message: '' });
-    const { loggedInStateHandler } = useContext(AuthContext);
+    const { username, loggedInStateHandler } = useContext(AuthContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const CreateArticle = () => {
 
     return (
         <Formik
-            initialValues={{ title: '', content: '', category: 'all', imageUrl: '', youtubeUrl: '', author: localStorage['user'] }}
+            initialValues={{ title: '', content: '', category: 'all', imageUrl: '', youtubeUrl: '', author: username }}
             validationSchema={Yup.object({
                 title: Yup.string()
                     .required('Title is required!'),

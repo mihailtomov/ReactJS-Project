@@ -9,8 +9,11 @@ const AuthDetailsArticle = ({
     youtubeUrl,
     author,
     date,
+    hasLiked,
+    likes,
     comments,
-    onCommentSubmitHandler
+    onCommentSubmitHandler, 
+    onLikeArticleHandler,
 }) => {
     return (
         <>
@@ -22,6 +25,9 @@ const AuthDetailsArticle = ({
                 youtubeUrl={youtubeUrl}
                 author={author}
                 date={date}
+                hasLiked={hasLiked}
+                likes={likes}
+                onLikeArticleHandler={onLikeArticleHandler}
             />
 
             <h4>Comments</h4>

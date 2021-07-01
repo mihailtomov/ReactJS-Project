@@ -75,27 +75,20 @@ const addComment = ({ articleId, name, comment }) => {
 }
 
 const update = (articleId, updatedArticleData) => {
-    const { title, content, category, imageUrl } = updatedArticleData;
+    if (updatedArticleData.youtubeUrl) {
 
-    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category)) {
-
-        if (updatedArticleData.youtubeUrl) {
-
-            if (isValidProtocol(updatedArticleData.youtubeUrl)) {
-                updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
-            } else {
-                throw { message: 'Invalid Youtube URL!' };
-            }
+        if (isValidProtocol(updatedArticleData.youtubeUrl)) {
+            updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
+        } else {
+            throw { message: 'Invalid Youtube URL!' };
         }
-
-        if (imageUrl && !isValidProtocol(imageUrl)) {
-            throw { message: 'Invalid image URL!' };
-        }
-
-        return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
-    } else {
-        throw { message: 'There is an empty field or the image URL is invalid!' };
     }
+
+    if (updatedArticleData.imageUrl && !isValidProtocol(updatedArticleData.imageUrl)) {
+        throw { message: 'Invalid image URL!' };
+    }
+
+    return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });
 }
 
 const remove = (articleId) => {

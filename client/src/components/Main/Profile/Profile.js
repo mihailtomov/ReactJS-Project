@@ -11,7 +11,7 @@ import errorHandler from '../../../utils/errorHandler';
 
 
 const Profile = () => {
-    const { loggedInStateHandler } = useContext(AuthContext);
+    const { username, loggedInStateHandler } = useContext(AuthContext);
 
     const [userComments, setUserComments] = useState(0);
     const [userArticles, setUserArticles] = useState([]);
@@ -19,8 +19,6 @@ const Profile = () => {
 
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
-
-        const username = localStorage['user'];
 
         userService.getUserInfo(username)
             .then(res => {

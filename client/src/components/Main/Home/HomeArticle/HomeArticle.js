@@ -11,7 +11,7 @@ const HomeArticle = ({
         <article className="home-article">
             <h3><Link to={`/article/details/${_id}`}>{title}</Link></h3>
             <p className="description">
-                {content.slice(0, 150)}&hellip;
+                <span>{content && content.slice(0, 150)}</span>&hellip;
                 <Link className="read-more" to={`/article/details/${_id}`}>read more</Link>
             </p>
         </article>

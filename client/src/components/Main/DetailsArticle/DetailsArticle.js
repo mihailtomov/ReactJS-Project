@@ -17,7 +17,7 @@ const DetailsArticle = ({
     match,
     location,
 }) => {
-    const { loggedIn, loggedInStateHandler } = useContext(AuthContext);
+    const { loggedIn, username, loggedInStateHandler } = useContext(AuthContext);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -25,6 +25,8 @@ const DetailsArticle = ({
     const [youtubeUrl, setYoutubeUrl] = useState('');
     const [author, setAuthor] = useState('');
     const [date, setDate] = useState('');
+    const [usersLiked, setUsersLiked] = useState([]);
+    const [likes, setLikes] = useState(0);
     const [_id, set_id] = useState('');
     const [comments, setComments] = useState([]);
     const [commentPosted, setCommentPosted] = useState('');
@@ -48,7 +50,7 @@ const DetailsArticle = ({
             .then(res => {
                 if (res.err) throw res.err;
 
-                const { _id, title, content, imageUrl, youtubeUrl, author, date, comments } = res;
+                const { _id, title, content, imageUrl, youtubeUrl, author, date, usersLiked, likes, comments } = res;
 
                 setTitle(title);
                 setContent(content);
@@ -56,17 +58,18 @@ const DetailsArticle = ({
                 setYoutubeUrl(youtubeUrl);
                 setAuthor(author);
                 setDate(date);
+                setUsersLiked(usersLiked);
+                setLikes(likes);
                 set_id(_id);
                 setComments(comments);
             })
             .catch(err => errorHandler(setOnSubmitError, err))
-    }, [commentPosted]);
-
+    }, [commentPosted, likes]);
 
     const onCommentSubmitHandler = (e) => {
         e.preventDefault();
 
-        const name = localStorage['user'];
+        const name = username;
         const comment = e.target.comment.value;
 
         articleService.postComment({ articleId: _id, name, comment })
@@ -77,6 +80,22 @@ const DetailsArticle = ({
                 e.target.comment.value = '';
             })
             .catch(err => errorHandler(setOnSubmitError, err));
+    }
+
+    const hasLiked = usersLiked.includes(username) ? true : false;
+
+    const onLikeArticleHandler = () => {
+        if (!hasLiked) {
+            usersLiked.push(username);
+
+            articleService.update(_id, { likes: likes + 1, usersLiked })
+                .then(res => {
+                    if (res.err) throw res.err;
+
+                    setLikes(oldLikes => oldLikes + 1);
+                })
+                .catch(err => errorHandler(setOnSubmitError, err));
+        }
     }
 
     if (!loggedIn) {
@@ -108,8 +127,11 @@ const DetailsArticle = ({
                 youtubeUrl={youtubeUrl}
                 author={author}
                 date={date}
+                hasLiked={hasLiked}
+                likes={likes}
                 comments={comments}
                 onCommentSubmitHandler={onCommentSubmitHandler}
+                onLikeArticleHandler={onLikeArticleHandler}
             />
 
         </section>
