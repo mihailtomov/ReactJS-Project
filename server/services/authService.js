@@ -4,47 +4,46 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { isEmpty } = require('../helpers/validators');
 
-const register = ({ username, password }) => {
+const register = async ({ username, password }) => {
     if (!isEmpty(username) && !isEmpty(password)) {
-        return User.exists({ username })
-            .then(userExists => {
-                if (userExists) throw { message: 'User already exists!' }
+        const userExists = await User.exists({ username });
 
-                return bcrypt.hash(password, SALT_ROUNDS);
-            })
-            .then(hash => {
-                const user = new User({ username, password: hash });
+        if (userExists) {
+            return Promise.reject({ message: 'User already exists!' });
+        }
 
-                return user.save();
-            })
+        const hash = await bcrypt.hash(password, SALT_ROUNDS);
+        const user = new User({ username, password: hash });
+
+        return await user.save();
     } else {
-        throw { message: 'Username and password cannot be empty!' };
+        return Promise.reject({ message: 'Username and password cannot be empty!' });
     }
 }
 
-const login = ({ username, password }) => {
+const login = async ({ username, password }) => {
     if (!isEmpty(username) && !isEmpty(password)) {
-        return User.findOne({ username })
-            .then(user => {
-                if (!user) {
-                    throw { message: 'Invalid username or password!' };
-                };
-    
-                return bcrypt.compare(password, user.password)
-                    .then(isValidPassword => {
-                        if (!isValidPassword) throw { message: 'Invalid username or password!' };
-    
-                        const token = jwt.sign({ _id: user._id, username }, SECRET, { expiresIn: '1h' });
-    
-                        return {
-                            _id: user._id,
-                            username,
-                            token,
-                        }
-                    })
-            })
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return Promise.reject({ message: 'Invalid username or password!' });
+        };
+
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if (!isValidPassword) {
+            return Promise.reject({ message: 'Invalid username or password!' });
+        }
+
+        const token = jwt.sign({ _id: user._id, username }, SECRET, { expiresIn: '1h' });
+
+        return {
+            _id: user._id,
+            username,
+            token,
+        }
     } else {
-        throw { message: 'Username and password cannot be empty!' };
+        return Promse.reject({ message: 'Username and password cannot be empty!' });
     }
 }
 

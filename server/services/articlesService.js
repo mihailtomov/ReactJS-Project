@@ -6,31 +6,25 @@ const getFormattedDate = require('../helpers/getFormattedDate');
 const embedYoutubeUrl = require('../helpers/embedYoutubeUrl');
 const { isEmpty, isValidProtocol } = require('../helpers/validators');
 
-const create = (articleData) => {
+const create = async (articleData) => {
     const { title, content, category, author } = articleData;
 
-    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && !isEmpty(author)) {
-        // articleData.date = getFormattedDate();
-
+    if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category)) {
         if (articleData.youtubeUrl && isValidProtocol(articleData.youtubeUrl)) {
             articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
         } else if (articleData.youtubeUrl && !isValidProtocol(articleData.youtubeUrl)) {
-            throw { message: 'Invalid Youtube URL!' };
+            return Promise.reject({ message: 'Invalid Youtube URL!' });
         }
 
         const article = new Article(articleData);
 
-        return User.findOne({ username: articleData.author })
-            .then(user => {
-                user.createdArticles.push(article);
+        const user = await User.findOne({ username: author });
+        user.createdArticles.push(article);
 
-                return user.save();
-            })
-            .then(() => {
-                return article.save();
-            });
+        await user.save();
+        return await article.save();
     } else {
-        throw { message: 'There is an empty field' };
+        return Promise.reject({ message: 'There is an empty field' });
     }
 }
 
@@ -46,28 +40,21 @@ const getOne = (articleId) => {
     return Article.findOne({ _id: articleId }).populate('comments');
 }
 
-const addComment = ({ articleId, name, comment }) => {
+const addComment = async ({ articleId, name, comment }) => {
     const newComment = new Comment({ name, comment, date: getFormattedDate({ year: '2-digit', month: 'short' }) });
+    const article = await Article.findOne({ _id: articleId });
 
-    return Article.findOne({ _id: articleId })
-        .then(article => {
-            newComment.number = article.comments.length + 1;
+    newComment.number = article.comments.length + 1;
+    article.comments.push(newComment);
 
-            article.comments.push(newComment);
+    await article.save();
 
-            return article.save();
-        })
-        .then(() => {
-            return User.findOne({ username: name })
-        })
-        .then(user => {
-            user.comments.push(newComment);
+    const user = await User.findOne({ username: name });
 
-            return user.save();
-        })
-        .then(() => {
-            return newComment.save();
-        });
+    user.comments.push(newComment);
+    await user.save();
+
+    return await newComment.save();
 }
 
 const update = (articleId, updatedArticleData) => {
@@ -76,7 +63,7 @@ const update = (articleId, updatedArticleData) => {
         if (isValidProtocol(updatedArticleData.youtubeUrl)) {
             updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
         } else {
-            throw { message: 'Invalid Youtube URL!' };
+            return Promise.reject({ message: 'Invalid Youtube URL!' });
         }
     }
 
