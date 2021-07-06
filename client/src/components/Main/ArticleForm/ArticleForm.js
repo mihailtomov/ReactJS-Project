@@ -4,7 +4,10 @@ import { Form } from 'formik';
 import { MyTextInput, MyTextareaInput, MySelect } from '../../../reusable-components/reusable-components.js';
 import availableOptions from '../../../utils/categoryOptions.js';
 
-const ArticleForm = () => {
+const ArticleForm = ({
+    setFieldValue,
+    values,
+}) => {
     return (
         <Form className="article-form">
             <MyTextInput
@@ -26,12 +29,11 @@ const ArticleForm = () => {
                 })}
             </MySelect>
 
-            <MyTextInput
-                label="Image URL (optional):"
-                name="imageUrl"
-                type="text"
-                placeholder="http://"
-            />
+            <label htmlFor="image">{values ? 'Change your image:' : 'Upload an image (optional):'}</label>
+            {values && values.imageUrl && <img src={values.imageUrl} alt="" />}
+            <input id="image" name="image" type="file" onChange={(event) => {
+                setFieldValue("image", event.currentTarget.files[0]);
+            }} />
 
             <MyTextInput
                 label="Youtube URL (optional):"

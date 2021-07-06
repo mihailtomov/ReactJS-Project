@@ -8,6 +8,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const app = express();
 require('./config/mongoose');
 
+app.use(express.static('public'));
 app.use(cors({ maxAge: 600 }));
 app.use(express.json());
 

@@ -51,13 +51,17 @@ const DetailsArticle = ({
                 if (res.err) throw res.err;
 
                 const { _id, title, content, imageUrl, youtubeUrl, author, date, usersLiked, likes, comments } = res;
+                
+                const dateArr = date.split('T');
+                const dateArgs = dateArr[0].split('-');
+                const formattedDate = `${dateArgs[2]}/${dateArgs[1]}/${dateArgs[0]}` + ' ' + dateArr[1].slice(0, 5);
 
                 setTitle(title);
                 setContent(content);
                 setImageUrl(imageUrl);
                 setYoutubeUrl(youtubeUrl);
                 setAuthor(author);
-                setDate(date);
+                setDate(formattedDate);
                 setUsersLiked(usersLiked);
                 setLikes(likes);
                 set_id(_id);

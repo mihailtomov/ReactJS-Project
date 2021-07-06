@@ -14,3 +14,14 @@
     width: 140px;
     height: 26px;
 }
+
+.article-form input[name=image] {
+    margin-top: 10px;
+}
+
+.article-form img {
+    display: block;
+    width: 300px;
+    height: 282px;
+    object-fit: cover;
+}

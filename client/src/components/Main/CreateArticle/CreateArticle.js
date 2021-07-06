@@ -19,24 +19,31 @@ const CreateArticle = () => {
 
     useEffect(() => {
         if (localStorage['auth']) loggedInStateHandler();
-    }, [])
+    }, []);
 
     return (
         <Formik
-            initialValues={{ title: '', content: '', category: 'all', imageUrl: '', youtubeUrl: '', author: username }}
+            initialValues={{ title: '', content: '', category: 'music', youtubeUrl: '', author: username, image: null }}
             validationSchema={Yup.object({
                 title: Yup.string()
                     .required('Title is required!'),
                 content: Yup.string()
                     .required('Content is required!'),
-                imageUrl: Yup.string()
-                    .url('Invalid URL!'),
                 youtubeUrl: Yup.string()
                     .url('Invalid URL!'),
             })}
             onSubmit={values => {
+                const formData = new FormData();
+
+                formData.append('title', values.title);
+                formData.append('content', values.content);
+                formData.append('category', values.category);
+                formData.append('youtubeUrl', values.youtubeUrl);
+                formData.append('author', values.author);
+                formData.append('image', values.image);
+
                 articleService
-                    .create(values)
+                    .create(formData)
                     .then(res => {
                         if (res.err) throw res.err;
 
@@ -48,17 +55,20 @@ const CreateArticle = () => {
                             }
                         });
                     })
-                    .catch(err => errorHandler(setOnSubmitError, err))
+                    .catch(err => errorHandler(setOnSubmitError, err));
             }}
         >
-            <section className="create-article">
-                {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+            {({ setFieldValue }) => (
 
-                <h2>Create new article</h2>
-                <div>
-                    <ArticleForm />
-                </div>
-            </section>
+                <section className="create-article">
+                    {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+
+                    <h2>Create new article</h2>
+                    <div>
+                        <ArticleForm setFieldValue={setFieldValue} />
+                    </div>
+                </section>
+            )}
         </Formik>
     );
 }

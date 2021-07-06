@@ -97,6 +97,7 @@
 
 .details-article span.cannot-like-article {
     float: right;
+    margin-top: 12px;
     color: #32a999;
     font-weight: bold;
 }
@@ -107,7 +108,8 @@
 
 .details-article span.can-like-article {
     float: right;
-    color: #2daac9;
+    margin-top: 12px;
+    color: #04808c;
     font-weight: bold;
 }
 

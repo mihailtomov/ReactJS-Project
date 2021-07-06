@@ -7,7 +7,7 @@ const articleSchema = mongoose.Schema({
     youtubeUrl: String,
     category: String,
     author: String,
-    date: String,
+    date: { type: Date, default: new Date() },
     usersLiked: Array,
     likes: { type: Number, default: 0 },
     comments: [{

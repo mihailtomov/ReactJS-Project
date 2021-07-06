@@ -7,19 +7,15 @@ const embedYoutubeUrl = require('../helpers/embedYoutubeUrl');
 const { isEmpty, isValidProtocol } = require('../helpers/validators');
 
 const create = (articleData) => {
-    const { title, content, category, imageUrl, author } = articleData;
+    const { title, content, category, author } = articleData;
 
     if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category) && !isEmpty(author)) {
-        articleData.date = getFormattedDate();
+        // articleData.date = getFormattedDate();
 
         if (articleData.youtubeUrl && isValidProtocol(articleData.youtubeUrl)) {
             articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
         } else if (articleData.youtubeUrl && !isValidProtocol(articleData.youtubeUrl)) {
             throw { message: 'Invalid Youtube URL!' };
-        }
-
-        if (imageUrl && !isValidProtocol(imageUrl)) {
-            throw { message: 'Invalid image URL!' };
         }
 
         const article = new Article(articleData);
@@ -34,7 +30,7 @@ const create = (articleData) => {
                 return article.save();
             });
     } else {
-        throw { message: 'There is an empty field or the image URL is invalid!' };
+        throw { message: 'There is an empty field' };
     }
 }
 
@@ -82,10 +78,6 @@ const update = (articleId, updatedArticleData) => {
         } else {
             throw { message: 'Invalid Youtube URL!' };
         }
-    }
-
-    if (updatedArticleData.imageUrl && !isValidProtocol(updatedArticleData.imageUrl)) {
-        throw { message: 'Invalid image URL!' };
     }
 
     return Article.findOneAndUpdate({ _id: articleId }, updatedArticleData, { new: true });

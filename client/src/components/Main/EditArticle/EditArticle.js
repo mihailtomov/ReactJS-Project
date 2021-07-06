@@ -59,21 +59,28 @@ const EditArticle = ({
     } else if (isDataAvailable) {
         return (
             <Formik
-                initialValues={{ title, content, category, imageUrl, youtubeUrl }}
+                initialValues={{ title, content, category, imageUrl, youtubeUrl, image: null }}
                 validationSchema={Yup.object({
                     title: Yup.string()
                         .required('Title is required!'),
                     content: Yup.string()
                         .required('Content is required!'),
-                    imageUrl: Yup.string()
-                        .url('Invalid URL!'),
                     youtubeUrl: Yup.string()
                         .url('Invalid URL!'),
                 })}
                 onSubmit={values => {
+                    const formData = new FormData();
+
+                    formData.append('title', values.title);
+                    formData.append('content', values.content);
+                    formData.append('category', values.category);
+                    formData.append('imageUrl', values.imageUrl);
+                    formData.append('youtubeUrl', values.youtubeUrl);
+                    formData.append('image', values.image);
+
                     const { articleId } = match.params;
 
-                    articleService.update(articleId, values)
+                    articleService.update(articleId, formData)
                         .then(res => {
                             if (res.err) throw res.err;
 
@@ -82,14 +89,17 @@ const EditArticle = ({
                         .catch(err => errorHandler(setOnSubmitError, err))
                 }}
             >
-                <section className="edit-article">
-                    {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+                {({ setFieldValue, values }) => (
 
-                    <h2>Edit your article</h2>
-                    <div>
-                        <ArticleForm />
-                    </div>
-                </section>
+                    <section className="edit-article">
+                        {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
+
+                        <h2>Edit your article</h2>
+                        <div>
+                            <ArticleForm setFieldValue={setFieldValue} values={values} />
+                        </div>
+                    </section>
+                )}
             </Formik>
         );
     } else {

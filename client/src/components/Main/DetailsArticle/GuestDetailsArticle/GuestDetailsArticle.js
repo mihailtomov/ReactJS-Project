@@ -37,7 +37,7 @@ const GuestDetailsArticle = ({
                 {
                     hasLiked ?
                         currentUser && <span className="cannot-like-article">{likes} <span>&#10084;</span></span> :
-                        currentUser && <span className="can-like-article">Like this article<span onClick={onLikeArticleHandler}>&#10084;</span>We have {likes} likes!</span>
+                        currentUser && <span className="can-like-article">Click on the heart!<span onClick={onLikeArticleHandler}>&#10084;</span>We have {likes} hearts!</span>
                 }
                 <p>
                     <time dateTime={date}>{date}</time>
