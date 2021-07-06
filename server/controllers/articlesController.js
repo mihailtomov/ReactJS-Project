@@ -109,6 +109,12 @@ router.delete('/:articleId/delete', isAuth, (req, res, next) => {
 
     articlesService.remove(articleId)
         .then(deletedArticle => {
+            try {
+                unlinkSync(`./public/${deletedArticle.imageUrl.slice(22)}`);
+            } catch (err) {
+                return next(err);
+            }
+
             res.status(200).json({ _id: deletedArticle._id });
         })
         .catch(next);
