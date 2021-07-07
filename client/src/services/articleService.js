@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:5000/api/articles';
 
-const fetchOptions = (method, isFormData, data) => {
+const fetchOptions = (method, data, isFormData) => {
     const token = localStorage['auth'];
 
     const headers = {
@@ -20,7 +20,7 @@ const fetchOptions = (method, isFormData, data) => {
 }
 
 const create = (articleData) => {
-    return fetch(baseUrl, fetchOptions('POST', true, articleData))
+    return fetch(baseUrl, fetchOptions('POST', articleData, true))
         .then(res => res.json())
 }
 
@@ -35,17 +35,17 @@ const getOne = (articleId) => {
 }
 
 const postComment = (commentData) => {
-    return fetch(`${baseUrl}/comments`, fetchOptions('POST', false, commentData))
+    return fetch(`${baseUrl}/comments`, fetchOptions('POST', commentData, false))
         .then(res => res.json());
 }
 
-const update = (articleId, updatedArticleData) => {
-    return fetch(`${baseUrl}/${articleId}/edit`, fetchOptions('PATCH', true, updatedArticleData))
+const update = (articleId, updatedArticleData, isFormData) => {
+    return fetch(`${baseUrl}/${articleId}/edit`, fetchOptions('PATCH', updatedArticleData, isFormData))
         .then(res => res.json());
 }
 
 const remove = (articleId) => {
-    return fetch(`${baseUrl}/${articleId}/delete`, fetchOptions('DELETE', false, {}))
+    return fetch(`${baseUrl}/${articleId}/delete`, fetchOptions('DELETE', {}, false))
         .then(res => res.json());
 }
 

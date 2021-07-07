@@ -80,7 +80,7 @@ const EditArticle = ({
 
                     const { articleId } = match.params;
 
-                    articleService.update(articleId, formData)
+                    articleService.update(articleId, formData, true)
                         .then(res => {
                             if (res.err) throw res.err;
 

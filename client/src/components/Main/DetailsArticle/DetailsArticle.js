@@ -92,7 +92,7 @@ const DetailsArticle = ({
         if (!hasLiked) {
             usersLiked.push(username);
 
-            articleService.update(_id, { likes: likes + 1, usersLiked })
+            articleService.update(_id, { likes: likes + 1, usersLiked }, false)
                 .then(res => {
                     if (res.err) throw res.err;
 

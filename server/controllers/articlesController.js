@@ -76,20 +76,22 @@ router.patch('/:articleId/edit', isAuth, (req, res, next) => {
             return next(err);
         }
 
-        const oldImagePath = req.body.imageUrl.slice(22);
+        if (req.body.imageUrl) {
+            const oldImagePath = req.body.imageUrl.slice(22);
 
-        if (req.file) {
-            req.body.imageUrl = `${baseImageUrl}${req.file.filename}`;
-        }
+            if (req.file) {
+                req.body.imageUrl = `${baseImageUrl}${req.file.filename}`;
+            }
 
-        const newImagePath = req.body.imageUrl.slice(22);
+            const newImagePath = req.body.imageUrl.slice(22);
 
-        
-        if (newImagePath !== oldImagePath && oldImagePath !== '') {
-            try {
-                unlinkSync(`./public/${oldImagePath}`);
-            } catch (err) {
-                return next(err);
+
+            if (newImagePath !== oldImagePath) {
+                try {
+                    unlinkSync(`./public/${oldImagePath}`);
+                } catch (err) {
+                    return next(err);
+                }
             }
         }
 
@@ -110,7 +112,9 @@ router.delete('/:articleId/delete', isAuth, (req, res, next) => {
     articlesService.remove(articleId)
         .then(deletedArticle => {
             try {
-                unlinkSync(`./public/${deletedArticle.imageUrl.slice(22)}`);
+                if (deletedArticle.imageUrl) {
+                    unlinkSync(`./public/${deletedArticle.imageUrl.slice(22)}`);
+                }
             } catch (err) {
                 return next(err);
             }
