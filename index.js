@@ -17,4 +17,8 @@ app.use(auth);
 app.use('/api', routes);
 app.use(errorHandler);
 
+app.get('*', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`);
+});
+
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
