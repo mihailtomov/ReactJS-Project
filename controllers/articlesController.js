@@ -4,7 +4,7 @@ const { isAuth } = require('../middlewares/authorization');
 const multer = require('multer');
 const { unlinkSync } = require('fs');
 
-const baseImageUrl = 'http://localhost:5000/images/';
+const baseImageUrl = '/images/';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
