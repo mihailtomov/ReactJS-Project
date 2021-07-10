@@ -34,6 +34,7 @@ const GuestDetailsArticle = ({
             {content.split('\n\n').map((paragraph, i) => <p key={i} className="description">{paragraph}</p>)}
             <div className="article-info">
                 <span className="author-name">Published by <strong>{author}</strong></span>
+                {!currentUser && <span className="cannot-like-article">{likes} <span>&#10084;</span></span>}
                 {
                     hasLiked ?
                         currentUser && <span className="cannot-like-article">{likes} <span>&#10084;</span></span> :

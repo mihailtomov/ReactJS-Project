@@ -112,6 +112,7 @@ const DetailsArticle = ({
                     youtubeUrl={youtubeUrl}
                     author={author}
                     date={date}
+                    likes={likes}
                 />
             </section>
         );

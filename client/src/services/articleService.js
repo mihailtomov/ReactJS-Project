@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5000/api/articles';
+const baseUrl = 'http://localhost/api/articles';
 
 const fetchOptions = (method, data, isFormData) => {
     const token = localStorage['auth'];

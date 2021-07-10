@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5000/api/users';
+const baseUrl = 'http://localhost/api/users';
 
 const getUserInfo = (username) => {
     const token = localStorage['auth'];

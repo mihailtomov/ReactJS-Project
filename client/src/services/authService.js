@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5000/api/auth';
+const baseUrl = 'http://localhost/api/auth';
 
 const endpoint = {
     register: `${baseUrl}/register`,
