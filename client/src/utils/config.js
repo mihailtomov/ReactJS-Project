@@ -1,5 +1,5 @@
 const buildApiBaseUrl = (endpoint) => {
-    return process.env.NODE_ENV === 'development' ? `http://localhost:5000/api/${endpoint}` : endpoint;
+    return process.env.NODE_ENV === 'development' ? `http://localhost:5000/api/${endpoint}` : `api/${endpoint}`;
 }
 
 const buildFirebaseStoragePath = (imageUrl) => {
