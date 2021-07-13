@@ -3,6 +3,7 @@ import './CreateArticle.css';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
+import { uploadImageToFirebase } from '../../../utils/firebase';
 import * as Yup from 'yup';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
@@ -23,7 +24,7 @@ const CreateArticle = () => {
 
     return (
         <Formik
-            initialValues={{ title: '', content: '', category: 'music', youtubeUrl: '', author: username, image: null }}
+            initialValues={{ title: '', content: '', category: 'music', imageUrl: '', youtubeUrl: '', author: username, image: null }}
             validationSchema={Yup.object({
                 title: Yup.string()
                     .required('Title is required!'),
@@ -32,18 +33,17 @@ const CreateArticle = () => {
                 youtubeUrl: Yup.string()
                     .url('Invalid URL!'),
             })}
-            onSubmit={values => {
-                const formData = new FormData();
+            onSubmit={async values => {
+                const { image } = values;
+                delete values.image;
 
-                formData.append('title', values.title);
-                formData.append('content', values.content);
-                formData.append('category', values.category);
-                formData.append('youtubeUrl', values.youtubeUrl);
-                formData.append('author', values.author);
-                formData.append('image', values.image);
+                if (image) {
+                    const storageUrl = await uploadImageToFirebase(image);
+                    values.imageUrl = storageUrl;
+                }
 
                 articleService
-                    .create(formData)
+                    .create(values)
                     .then(res => {
                         if (res.err) throw res.err;
 

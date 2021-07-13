@@ -1,4 +1,6 @@
-const baseUrl = '/api/auth';
+import buildApiBaseUrl from '../utils/config';
+
+const baseUrl = buildApiBaseUrl('auth');
 
 const endpoint = {
     register: `${baseUrl}/register`,

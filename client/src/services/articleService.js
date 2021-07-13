@@ -1,6 +1,8 @@
-const baseUrl = '/api/articles';
+import buildApiBaseUrl from '../utils/config';
 
-const fetchOptions = (method, data, isFormData) => {
+const baseUrl = buildApiBaseUrl('articles');
+
+const fetchOptions = (method, data) => {
     const token = localStorage['auth'];
 
     const headers = {
@@ -8,19 +10,17 @@ const fetchOptions = (method, data, isFormData) => {
         'Authorization': `Bearer ${token}`
     }
 
-    if (isFormData) {
-        delete headers['Content-Type'];
-    }
+    const body = JSON.stringify(data);
 
     return {
         method,
         headers,
-        body: isFormData ? data : JSON.stringify(data)
+        body
     }
 }
 
 const create = (articleData) => {
-    return fetch(baseUrl, fetchOptions('POST', articleData, true))
+    return fetch(baseUrl, fetchOptions('POST', articleData))
         .then(res => res.json())
 }
 
@@ -35,17 +35,17 @@ const getOne = (articleId) => {
 }
 
 const postComment = (commentData) => {
-    return fetch(`${baseUrl}/comments`, fetchOptions('POST', commentData, false))
+    return fetch(`${baseUrl}/comments`, fetchOptions('POST', commentData))
         .then(res => res.json());
 }
 
-const update = (articleId, updatedArticleData, isFormData) => {
-    return fetch(`${baseUrl}/${articleId}/edit`, fetchOptions('PATCH', updatedArticleData, isFormData))
+const update = (articleId, updatedArticleData) => {
+    return fetch(`${baseUrl}/${articleId}/edit`, fetchOptions('PATCH', updatedArticleData))
         .then(res => res.json());
 }
 
 const remove = (articleId) => {
-    return fetch(`${baseUrl}/${articleId}/delete`, fetchOptions('DELETE', {}, false))
+    return fetch(`${baseUrl}/${articleId}/delete`, fetchOptions('DELETE', {}))
         .then(res => res.json());
 }
 

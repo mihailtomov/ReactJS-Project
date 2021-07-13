@@ -12,7 +12,6 @@ import articleService from '../../../services/articleService';
 import errorHandler from '../../../utils/errorHandler';
 import timeoutMessage from '../../../utils/timeoutMessage';
 
-
 const DetailsArticle = ({
     match,
     location,

@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import AsideMenu from './components/AsideMenu/AsideMenu.js';
 import Header from './components/Header/Header.js';
@@ -13,10 +13,6 @@ import AuthContext from './AuthContext';
 const App = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
-
-    useEffect(() => {
-        loggedInStateHandler();
-    }, [])
 
     const loggedInStateHandler = () => {
         const token = localStorage['auth'];

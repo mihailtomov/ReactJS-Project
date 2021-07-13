@@ -32,6 +32,7 @@
 }
 
 .details-article p.description {
+    white-space: pre-line;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     margin-bottom: 20px;

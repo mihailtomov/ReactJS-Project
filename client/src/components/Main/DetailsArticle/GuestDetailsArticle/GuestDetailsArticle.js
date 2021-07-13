@@ -31,7 +31,7 @@ const GuestDetailsArticle = ({
                 {imageUrl && <img src={imageUrl} alt="" />}
                 {youtubeUrl && <iframe width="500" height="281" src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
             </div>
-            {content.split('\n\n').map((paragraph, i) => <p key={i} className="description">{paragraph}</p>)}
+            <p className="description">{content}</p>
             <div className="article-info">
                 <span className="author-name">Published by <strong>{author}</strong></span>
                 {!currentUser && <span className="cannot-like-article">{likes} <span>&#10084;</span></span>}

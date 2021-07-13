@@ -25,3 +25,13 @@
     height: 282px;
     object-fit: cover;
 }
+
+.article-form div.delete-image {
+    margin-top: 2px;
+    margin-bottom: 7px;
+}
+
+.article-form span.delete-image-btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

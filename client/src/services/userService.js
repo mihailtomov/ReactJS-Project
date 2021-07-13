@@ -1,4 +1,6 @@
-const baseUrl = '/api/users';
+import buildApiBaseUrl from '../utils/config';
+
+const baseUrl = buildApiBaseUrl('users');
 
 const getUserInfo = (username) => {
     const token = localStorage['auth'];

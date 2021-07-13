@@ -6,7 +6,8 @@ import availableOptions from '../../../utils/categoryOptions.js';
 
 const ArticleForm = ({
     setFieldValue,
-    values,
+    imageUrl,
+    onDeleteImageHandler,
 }) => {
     return (
         <Form className="article-form">
@@ -29,8 +30,17 @@ const ArticleForm = ({
                 })}
             </MySelect>
 
-            <label htmlFor="image">{values ? 'Change your image:' : 'Upload an image (optional):'}</label>
-            {values && values.imageUrl && <img src={values.imageUrl} alt="" />}
+            <label htmlFor="image">{imageUrl ? 'Change your image:' : 'Upload an image (optional):'}</label>
+            {
+                imageUrl && (
+                    <>
+                        <img src={imageUrl} alt="" />
+                        <div className="delete-image">
+                            <span onClick={onDeleteImageHandler} className="delete-image-btn">[Delete your image]</span>
+                        </div>
+                    </>
+                )
+            }
             <input id="image" name="image" type="file" onChange={(event) => {
                 setFieldValue("image", event.currentTarget.files[0]);
             }} />

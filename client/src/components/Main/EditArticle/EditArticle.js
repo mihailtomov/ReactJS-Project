@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
+import { buildFirebaseStoragePath } from '../../../utils/config';
+import { uploadImageToFirebase, deleteImageFromFirebase } from '../../../utils/firebase';
 import * as Yup from 'yup';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
@@ -48,6 +50,26 @@ const EditArticle = ({
             .catch(err => errorHandler(setOnSubmitError, err))
     }, []);
 
+    const onDeleteImageHandler = async () => {
+        if (imageUrl) {
+            const filePath = buildFirebaseStoragePath(imageUrl);
+
+            deleteImageFromFirebase(filePath);
+
+            const { articleId } = match.params;
+
+            try {
+                const article = await articleService.getOne(articleId);
+                article.imageUrl = '';
+
+                await articleService.update(articleId, article);
+                setImageUrl('');
+            } catch (err) {
+                errorHandler(setOnSubmitError, err);
+            }
+        }
+    }
+
     if (isArticleUpdated) {
         return <Redirect to={{
             pathname: `/article/details/${match.params.articleId}`,
@@ -68,19 +90,24 @@ const EditArticle = ({
                     youtubeUrl: Yup.string()
                         .url('Invalid URL!'),
                 })}
-                onSubmit={values => {
-                    const formData = new FormData();
+                onSubmit={async values => {
+                    const { imageUrl, image } = values;
+                    delete values.image;
 
-                    formData.append('title', values.title);
-                    formData.append('content', values.content);
-                    formData.append('category', values.category);
-                    formData.append('imageUrl', values.imageUrl);
-                    formData.append('youtubeUrl', values.youtubeUrl);
-                    formData.append('image', values.image);
+                    if (imageUrl && image) {
+                        const filePath = buildFirebaseStoragePath(imageUrl);
+
+                        deleteImageFromFirebase(filePath);
+                    }
+
+                    if (image) {
+                        const storageUrl = await uploadImageToFirebase(image);
+                        values.imageUrl = storageUrl;
+                    }
 
                     const { articleId } = match.params;
 
-                    articleService.update(articleId, formData, true)
+                    articleService.update(articleId, values)
                         .then(res => {
                             if (res.err) throw res.err;
 
@@ -89,14 +116,18 @@ const EditArticle = ({
                         .catch(err => errorHandler(setOnSubmitError, err))
                 }}
             >
-                {({ setFieldValue, values }) => (
+                {({ setFieldValue }) => (
 
                     <section className="edit-article">
                         {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
 
                         <h2>Edit your article</h2>
                         <div>
-                            <ArticleForm setFieldValue={setFieldValue} values={values} />
+                            <ArticleForm
+                                setFieldValue={setFieldValue}
+                                imageUrl={imageUrl}
+                                onDeleteImageHandler={onDeleteImageHandler}
+                            />
                         </div>
                     </section>
                 )}

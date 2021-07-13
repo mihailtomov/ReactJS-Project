@@ -2,13 +2,14 @@ import './DeleteArticle.css';
 
 import { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { buildFirebaseStoragePath } from '../../../utils/config';
+import { deleteImageFromFirebase } from '../../../utils/firebase';
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 
 import AuthContext from '../../../AuthContext';
 import articleService from '../../../services/articleService';
 import errorHandler from '../../../utils/errorHandler';
-
 
 const DeleteArticle = ({
     match
@@ -23,7 +24,16 @@ const DeleteArticle = ({
         loggedInStateHandler();
     }, []);
 
-    const onDeleteClickHandler = () => {
+    const onDeleteClickHandler = async () => {
+        const article = await articleService.getOne(articleId);
+        const { imageUrl } = article;
+
+        if (imageUrl) {
+            const filePath = buildFirebaseStoragePath(imageUrl);
+
+            deleteImageFromFirebase(filePath);
+        }
+
         articleService.remove(articleId)
             .then(res => {
                 if (res.err) throw res.err;
