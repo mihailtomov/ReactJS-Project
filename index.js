@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const { PORT } = require('./config/server');
 const cors = require('cors');
 const routes = require('./routes');
@@ -7,10 +8,8 @@ const errorHandler = require('./middlewares/errorHandler');
 const path = require('path');
 
 const app = express();
-require('dotenv').config();
 require('./config/mongoose');
 
-app.use(express.static('public'));
 app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use(cors({ maxAge: 600 }));
 app.use(express.json());
