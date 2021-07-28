@@ -7,12 +7,18 @@ const embedYoutubeUrl = require('../helpers/embedYoutubeUrl');
 const { isEmpty, isValidProtocol } = require('../helpers/validators');
 
 const create = async (articleData) => {
-    const { title, content, category, author } = articleData;
+    const { title, content, category, youtubeUrl, author } = articleData;
 
     if (!isEmpty(title) && !isEmpty(content) && !isEmpty(category)) {
-        if (articleData.youtubeUrl && isValidProtocol(articleData.youtubeUrl)) {
-            articleData.youtubeUrl = embedYoutubeUrl(articleData.youtubeUrl);
-        } else if (articleData.youtubeUrl && !isValidProtocol(articleData.youtubeUrl)) {
+        if (youtubeUrl && isValidProtocol(youtubeUrl)) {
+            const embeddedUrl = embedYoutubeUrl(youtubeUrl);
+
+            if (embeddedUrl === 'Invalid') {
+                return Promise.reject({ message: 'Invalid Youtube URL!' });
+            } else {
+                articleData.youtubeUrl = embeddedUrl;
+            }
+        } else if (youtubeUrl && !isValidProtocol(youtubeUrl)) {
             return Promise.reject({ message: 'Invalid Youtube URL!' });
         }
 
@@ -58,10 +64,18 @@ const addComment = async ({ articleId, name, comment }) => {
 }
 
 const update = (articleId, updatedArticleData) => {
-    if (updatedArticleData.youtubeUrl) {
+    const { youtubeUrl } = updatedArticleData;
 
-        if (isValidProtocol(updatedArticleData.youtubeUrl)) {
-            updatedArticleData.youtubeUrl = embedYoutubeUrl(updatedArticleData.youtubeUrl);
+    if (youtubeUrl) {
+
+        if (isValidProtocol(youtubeUrl)) {
+            const embeddedUrl = embedYoutubeUrl(youtubeUrl);
+
+            if (embeddedUrl === 'Invalid') {
+                return Promise.reject({ message: 'Invalid Youtube URL!' });
+            } else {
+                updatedArticleData.youtubeUrl = embeddedUrl;
+            }
         } else {
             return Promise.reject({ message: 'Invalid Youtube URL!' });
         }

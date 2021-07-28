@@ -11,8 +11,6 @@ import articleService from '../../../services/articleService';
 import errorHandler from '../../../utils/errorHandler';
 import AuthContext from '../../../AuthContext';
 
-import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
-
 const CreateArticle = () => {
     const [onSubmitError, setOnSubmitError] = useState({ message: '' });
     const { username, loggedInStateHandler } = useContext(AuthContext);
@@ -61,12 +59,15 @@ const CreateArticle = () => {
             {({ setFieldValue }) => (
 
                 <section className="create-article">
-                    {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
-
+        
                     <h2>Create new article</h2>
                     <div>
-                        <ArticleForm setFieldValue={setFieldValue} />
+                        <ArticleForm
+                            setFieldValue={setFieldValue}
+                            onSubmitError={onSubmitError}
+                        />
                     </div>
+                    
                 </section>
             )}
         </Formik>

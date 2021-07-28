@@ -3,7 +3,7 @@ const errorHandler = (setOnSubmitError, err) => {
 
     setTimeout(() => {
         setOnSubmitError({ message: '' });
-    }, 3000)
+    }, 3000);
 }
 
 export default errorHandler;

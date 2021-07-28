@@ -4,10 +4,13 @@ import { Form } from 'formik';
 import { MyTextInput, MyTextareaInput, MySelect } from '../../../reusable-components/reusable-components.js';
 import availableOptions from '../../../utils/categoryOptions.js';
 
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
+
 const ArticleForm = ({
     setFieldValue,
     imageUrl,
     onDeleteImageHandler,
+    onSubmitError,
 }) => {
     return (
         <Form className="article-form">
@@ -51,6 +54,8 @@ const ArticleForm = ({
                 type="text"
                 placeholder="https://"
             />
+
+            {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
 
             <input type="submit" value="Submit" />
         </Form>

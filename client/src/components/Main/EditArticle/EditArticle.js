@@ -6,7 +6,6 @@ import { uploadImageToFirebase, deleteImageFromFirebase } from '../../../utils/f
 import * as Yup from 'yup';
 
 import ArticleForm from '../ArticleForm/ArticleForm.js';
-import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 
 import articleService from '../../../services/articleService';
 import AuthContext from '../../../AuthContext.js';
@@ -119,7 +118,6 @@ const EditArticle = ({
                 {({ setFieldValue }) => (
 
                     <section className="edit-article">
-                        {onSubmitError.message.length > 0 && <ErrorMessage message={onSubmitError.message} />}
 
                         <h2>Edit your article</h2>
                         <div>
@@ -127,8 +125,10 @@ const EditArticle = ({
                                 setFieldValue={setFieldValue}
                                 imageUrl={imageUrl}
                                 onDeleteImageHandler={onDeleteImageHandler}
+                                onSubmitError={onSubmitError}
                             />
                         </div>
+
                     </section>
                 )}
             </Formik>
