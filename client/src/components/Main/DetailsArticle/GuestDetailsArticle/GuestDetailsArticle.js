@@ -16,7 +16,16 @@ const GuestDetailsArticle = ({
     onLikeArticleHandler
 }) => {
     const { username: currentUser } = useContext(AuthContext);
-    const height = imageUrl || youtubeUrl ? '300px' : '0px';
+
+    let height;
+
+    if ((imageUrl || youtubeUrl) && (window.innerWidth > 961)) {
+        height = '300px';
+    } else if ((imageUrl || youtubeUrl) && (window.innerWidth > 767)) {
+        height = '180px';
+    } else {
+        height = null;
+    }
 
     return (
         <article>

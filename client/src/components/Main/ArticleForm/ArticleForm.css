@@ -1,4 +1,4 @@
-.article-form input[name=title], input[name=imageUrl], input[name=youtubeUrl] {
+.article-form input[name=title], input[name=youtubeUrl] {
     width: 500px;
 }
 
@@ -34,4 +34,26 @@
 .article-form span.delete-image-btn:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+@media (max-width:480px) {
+    .article-form input[name=title], input[name=youtubeUrl] {
+        width: 164px;
+    }
+    .article-form textarea[name=content] {
+        width: 92%;
+    }
+    .article-form img {
+        width: 175px;
+        height: 165px;
+    }
+}
+
+@media (min-width: 481px) and (max-width:960px) {
+    .article-form input[name=title], input[name=youtubeUrl] {
+        width: 260px;
+    }
+    .article-form textarea[name=content] {
+        width: 98%;
+    }
 }

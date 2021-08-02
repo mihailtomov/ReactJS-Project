@@ -31,3 +31,15 @@
 .comment-box p.comment-description {
     margin-top: 15px;
 }
+
+@media (max-width:480px) {
+    .comment-box time.comment-date {
+        font-size: 9px;
+    }
+    .comment-box div.comment-name {
+        font-size: 13px;
+    }
+    .comment-box var.comment-number {
+        font-size: 11px;
+    }
+}
