@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -11,6 +11,8 @@ import { MyTextInput } from '../../../reusable-components/reusable-components.js
 import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 import SuccessMessage from '../SuccessMessage/SuccessMessage.js';
 
+import AuthContext from '../../../AuthContext';
+
 const Login = ({
     location
 }) => {
@@ -21,7 +23,11 @@ const Login = ({
         type: location.message ? location.message.type : ''
     });
 
+    const { loggedInStateHandler } = useContext(AuthContext);
+
     useEffect(() => {
+        if (localStorage['auth']) loggedInStateHandler();
+
         const timer = timeoutMessage(setOnSuccessMessage, 3000);
         return () => clearTimeout(timer);
     }, [])

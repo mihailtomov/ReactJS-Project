@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -9,9 +9,17 @@ import { MyTextInput } from '../../../reusable-components/reusable-components.js
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 
+import AuthContext from '../../../AuthContext';
+
 const Register = () => {
     const [registered, setRegistered] = useState(false);
     const [onSubmitError, setOnSubmitError] = useState({ message: '' });
+
+    const { loggedInStateHandler } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (localStorage['auth']) loggedInStateHandler();
+    }, [])
 
     if (registered) {
         return (
